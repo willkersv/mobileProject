@@ -10,6 +10,8 @@ export default function App() {
   );
 }
 
+//Teste Willker tchola
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
