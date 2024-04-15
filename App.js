@@ -1,8 +1,8 @@
 import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useState } from 'react';
-import Button from './src/components/Button.js';
-
+import Botao from './src/components/Botao.js';
+import ClickableText from './src/components/ClickableText.js'
 
 const App = () => {
 
@@ -23,32 +23,20 @@ const App = () => {
     console.log("Direcionado para a tela ESQUECEU SENHA")
   }
 
-  const toScreenCreateAccount = () => {
-    console.log("Direcionado para a tela CRIAR CONTA")
-  }
-
   return (
     <View style={styles.container}>
-      <View style={styles.cLogo}>
-        <Text style={styles.txtLogo}>Satisfying.you</Text>
-      </View>
 
-      <View style = {styles.cInput}>
-        <Text style = {styles.text}>E-mail</Text>
-        <TextInput style = {styles.textInput} value={txtEmail} onChangeText={setTxtEmail}/>
+      <Text style = {styles.logo}>Satisfying.you</Text>
 
-        <Text style = {styles.text}>Senha</Text>
-        <TextInput style = {styles.textInput} value={txtSenha} onChangeText={setTxtSenha}/>
+      <Text style = {styles.text}>Email</Text>
+      <TextInput style = {styles.textInput} value={txtEmail} onChangeText={setTxtEmail}/>
 
-        <Text style = {styles.textWarn}>E-mail e/ou senha inválidos.</Text>
+      <Text style = {styles.text}>Senha</Text>
+      <TextInput style = {styles.textInput} value={txtSenha} onChangeText={setTxtSenha}/>
 
-        <Button txtButton="Entrar" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={compareLogin}/>
-      </View>
-      
-      <View style={styles.cButtons}>
-        <Button txtButton="Criar minha conta" buttonColor="#419ED7" txtColor="#FFFFFF" functionButton={toScreenCreateAccount}/>
-        <Button txtButton="Esqueci minha senha" buttonColor="#B0CCDE"  txtColor="#FFFFFF" functionButton={toScreenForgetPsw}/>
-      </View>
+      <Botao txtButton="Entrar" buttonColor="#419ED7" functionButton={compareLogin}/>
+
+      <ClickableText txt="Esqueci minha senha" txtColor="#FF6432" functionTextClick={toScreenForgetPsw}/>
 
       <StatusBar style="auto"/>
     </View>
@@ -56,52 +44,31 @@ const App = () => {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: 'center',
-    backgroundColor: '#372775',
-    padding: 20
-  },
-
-  cLogo: {
-    flexDirection:"row",
-    alignContent:"center",
-    justifyContent:"center"
-  },
-  cInput: {
-    paddingTop: 10
-  },
-  cButtons: {
-    paddingTop: 40,
-  },
-  
-  txtLogo: {
-    color: "#FFFFFF",
-    justifyContent: 'center',
-    alignContent: 'center',
-    textAlign: "center",
+  logo: {
     fontWeight: "bold",
-    fontStyle: "italic",
-    fontSize: 36
+    fontSize: 36,
+    padding: 20,
+    color: "#4169e1"
   },
   text: {
-    //fontFamily: "Averia Libre",
     textAlign: "left",
     justifyContent: "flex-start",
     fontSize: 20,
-    marginTop: 20,
-    color: "#FFFFFF"
+    padding: 10
   },
   textInput: {
-    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#eee",
+    width: 200,
+    height: 35,
     paddingLeft: 5
   },
-  textWarn: {
-    color:"#FD7979",
-    marginBottom: 10
-  }
-
+  container: {
+    flex: 1,
+    backgroundColor: '#372775',
+    alignItems: "center",
+    justifyContent: 'center'
+  },
 });
 
 export default App
