@@ -25,6 +25,7 @@ const App = () => {
 
   return (
     <View style={styles.container}>
+
       <Text style = {styles.logo}>Satisfying.you</Text>
 
       <Text style = {styles.text}>Email</Text>
