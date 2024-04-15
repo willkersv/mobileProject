@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Text, TextInput, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { useState } from 'react';
+import { useFonts } from 'expo-font'
 import Button from './src/components/Button.js';
 
 
@@ -9,12 +10,25 @@ const App = () => {
   const [txtEmail, setTxtEmail] = useState('')
   const [txtSenha, setTxtSenha] = useState('')
 
+  const [fontsLoaded] = useFonts({
+    'AveriaLibre': require('./assets/fonts/AveriaLibre-Regular.ttf'),
+  });
+
+  if(!fontsLoaded) {
+    return null
+  }
+
+  //Funcoes do codigo
   const compareLogin = () => {
     let Email = txtEmail
     let senha = txtSenha
 
     if(Email === "adm" && senha === "123"){
       console.log("Acesso concedido")
+    }
+    else{
+      console.log("E-mail e/ou senha inválidos.")
+      styles.textWarn.opacity = 1
     }
     console.log("Email = " + Email + "\n Senha = " + senha)
   }
@@ -27,6 +41,7 @@ const App = () => {
     console.log("Direcionado para a tela CRIAR CONTA")
   }
 
+  //Codigo
   return (
     <View style={styles.container}>
       <View style={styles.cLogo}>
@@ -55,13 +70,14 @@ const App = () => {
   );
 }
 
+//Estilo do codigo
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
     justifyContent: 'center',
     backgroundColor: '#372775',
-    padding: 20
+    padding: 20,
   },
 
   cLogo: {
@@ -81,12 +97,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     textAlign: "center",
-    fontWeight: "bold",
-    fontStyle: "italic",
-    fontSize: 36
+    fontFamily: "AveriaLibre",
+    fontSize: 40
   },
   text: {
-    //fontFamily: "Averia Libre",
+    fontFamily: "AveriaLibre",
     textAlign: "left",
     justifyContent: "flex-start",
     fontSize: 20,
@@ -94,12 +109,16 @@ const styles = StyleSheet.create({
     color: "#FFFFFF"
   },
   textInput: {
+    fontFamily: "AveriaLibre",
     backgroundColor: "#FFFFFF",
-    paddingLeft: 5
+    paddingLeft: 5,
+    height: 40
   },
   textWarn: {
+    fontFamily: "AveriaLibre",
     color:"#FD7979",
-    marginBottom: 10
+    marginBottom: 10,
+    opacity: 0
   }
 
 });

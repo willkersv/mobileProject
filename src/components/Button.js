@@ -18,10 +18,13 @@ const style = StyleSheet.create({
     buttonStyle: (buttonColor, txtColor) => ({
         backgroundColor: buttonColor,
         color: txtColor,
+        fontFamily: "AveriaLibre",
         textAlign: "center",
+        textAlignVertical: "center",
         fontSize: 24,
         marginTop: 5,
-        marginBottom: 5
+        marginBottom: 5,
+        height: 40
     })
 
 })
