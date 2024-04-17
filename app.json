@@ -32,6 +32,12 @@
         {
           "fonts": ["./assets/fonts/AveriaLibre-Regular.ttf"]
         }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
+        }
       ]
     ]
   }
