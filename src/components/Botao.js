@@ -17,6 +17,7 @@ const style = StyleSheet.create({
     margin: 20,
     backgroundColor: buttonColor,
     fontSize: 26,
+    color: 'white',
   }),
 });
 export default Botao;
