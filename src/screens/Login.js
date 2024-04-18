@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import Button from '../components/Button.js';
 import LabelTextInput from '../components/LabelTextInput.js';
 import TextWarn from '../components/TextWarn.js';
