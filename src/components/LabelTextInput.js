@@ -1,10 +1,10 @@
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 
-
 const LabelTextInput = (props) => {
     
     const label = props.label
     const placeHolder = props.placeHolder
+    const placeHolderTextColor = props.placeholderTextColor
     const inputValue = props.inputValue
     const inputType = props.inputType
     const onChangeText = props.onChangeText
@@ -22,25 +22,24 @@ const LabelTextInput = (props) => {
     return (
         <View style={styles.txtInputContainer}>
             <Text style={styles.label}>{label}</Text>
-            <TextInput style={styles.input} placeholder={placeHolder} value={inputValue} onChangeText={onChangeText} secureTextEntry={secureTextEntry} keyboardType={keyboardType} autoCapitalize='none'/>
+            <TextInput style={styles.input} placeholder={placeHolder} placeholderTextColor={placeHolderTextColor} value={inputValue} onChangeText={onChangeText} secureTextEntry={secureTextEntry} keyboardType={keyboardType} autoCapitalize='none'/>
         </View>
     );
 };
-
 
 const styles = StyleSheet.create({
     label: {
         fontFamily: "AveriaLibre",
         textAlign: "left",
         fontSize: 20,
-        color: "#FFFFFF"
+        color: "#FFFFFF",
     },
     input: {
         fontSize: 18,
         fontFamily: "AveriaLibre",
         color: "#3F92C5",
         backgroundColor: "#FFFFFF",
-        paddingLeft: 5,
+        paddingLeft: 15,
         height: 30,
     },
     txtInputContainer: {
@@ -49,4 +48,3 @@ const styles = StyleSheet.create({
 })
 
 export default LabelTextInput
-
