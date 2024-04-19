@@ -8,8 +8,7 @@ import Button from '../components/Button.js';
 import LabelTextInput from '../components/LabelTextInput.js';
 import TextWarn from '../components/TextWarn.js';
 
-
-const Login = () => {
+const Login = (props) => {
 
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
@@ -55,9 +54,9 @@ const Login = () => {
 
   const toScreenCreateAccount = () => {
     console.log("Direcionado para a tela CRIAR CONTA")
+    props.navigation.navigate('NovaConta')
   }
 
-  //Codigo
   return (
     <View style={styles.container}>
       <View style={styles.cLogo}>
@@ -66,8 +65,8 @@ const Login = () => {
       </View>
 
       <View style = {styles.cInput}>
-        <LabelTextInput label="E-mail" placeHolder="jurandir.pereira@hotmail.com" inputValue={txtEmail} inputType="EMAIL" onChangeText={(txtEmail) => setTxtEmail(txtEmail)}/>
-        <LabelTextInput label="Senha" placeHolder="*********" inputValue={txtSenha} inputType="PSW" onChangeText={(txtSenha) => setTxtSenha(txtSenha)}/>
+        <LabelTextInput label="E-mail" placeHolder="jurandir.pereira@hotmail.com" placeholderTextColor="#3F92C5" inputValue={txtEmail} inputType="EMAIL" onChangeText={(txtEmail) => setTxtEmail(txtEmail)}/>
+        <LabelTextInput label="Senha" placeHolder="*********" placeholderTextColor="#3F92C5" inputValue={txtSenha} inputType="PSW" onChangeText={(txtSenha) => setTxtSenha(txtSenha)}/>
 
         <TextWarn txt="E-mail e/ou senha inválidos." isVisible={!isLoginValid}/>
 
@@ -84,7 +83,6 @@ const Login = () => {
   );
 }
 
-//Estilo do codigo
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -94,7 +92,6 @@ const styles = StyleSheet.create({
     padding: 20,
     paddingHorizontal: '20%'
   },
-
   cLogo: {
     flexDirection:"row",
     alignContent:"center",
@@ -107,7 +104,6 @@ const styles = StyleSheet.create({
   cButtons: {
     marginTop: 20,
   },
-
   txtLogo: {
     color: "#FFFFFF",
     justifyContent: 'center',
@@ -115,8 +111,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontFamily: "AveriaLibre",
     fontSize: 40
-  },
-
+  }
 });
 
 export default Login
