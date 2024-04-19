@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { View, StyleSheet, Text } from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useState } from 'react';
@@ -79,8 +78,6 @@ const Login = () => {
         <Button txtButton="Criar minha conta" buttonColor="#419ED7" txtColor="#FFFFFF" functionButton={toScreenCreateAccount}/>
         <Button txtButton="Esqueci minha senha" buttonColor="#B0CCDE"  txtColor="#FFFFFF" functionButton={toScreenForgetPsw}/>
       </View>
-
-      <StatusBar style="auto"/>
     </View>
   );
 }

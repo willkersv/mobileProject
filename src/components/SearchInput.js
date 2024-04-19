@@ -8,20 +8,15 @@ const SearchInput = (props) => {
     const onChangeText = props.onChangeText
 
     return (
-        <View style={styles.container}>
-            <View style={styles.cInput}>
-                <Icon style={styles.iconStyle} name='search' size={30}/>
-                <TextInput style={styles.input} placeholder={placeholder} value={inputValue} onChangeText={onChangeText} autoCapitalize='none'/>
-            </View>
+        <View style={styles.cInput}>
+            <Icon style={styles.iconStyle} name='search' size={30}/>
+            <TextInput style={styles.input} placeholder={placeholder} value={inputValue} onChangeText={onChangeText} autoCapitalize='none'/>
         </View>
     );
 };
 
 
 const styles = StyleSheet.create({
-    container: {
-        marginVertical: 10,
-    },
     cInput: {
         flexDirection:"row",
         backgroundColor:"#FFFFFF",
