@@ -1,9 +1,9 @@
-import { StatusBar } from 'expo-status-bar';
-import { View, StyleSheet, Text, TextInput } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
 import Button from '../components/Button.js';
 import LabelTextInput from '../components/LabelTextInput.js';
 import TextWarn from '../components/TextWarn.js';
@@ -78,8 +78,6 @@ const Login = () => {
         <Button txtButton="Criar minha conta" buttonColor="#419ED7" txtColor="#FFFFFF" functionButton={toScreenCreateAccount}/>
         <Button txtButton="Esqueci minha senha" buttonColor="#B0CCDE"  txtColor="#FFFFFF" functionButton={toScreenForgetPsw}/>
       </View>
-
-      <StatusBar style="auto"/>
     </View>
   );
 }

@@ -8,12 +8,12 @@ const Button = (props) => {
 
     return(
         <TouchableOpacity onPress={props.functionButton}>
-            <Text style = {style.buttonStyle(buttonColor, txtColor)}>{txtButton}</Text>
+            <Text style = {styles.buttonStyle(buttonColor, txtColor)}>{txtButton}</Text>
         </TouchableOpacity>
     )
 }
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
     buttonStyle: (buttonColor, txtColor) => ({
         backgroundColor: buttonColor,
         color: txtColor,
@@ -22,7 +22,10 @@ const style = StyleSheet.create({
         textAlignVertical: "center",
         fontSize: 24,
         marginTop: 5,
-        height: 30
+        height: 30,
+
+        shadowColor:"#000000",
+        elevation:12
     })
 })
 
