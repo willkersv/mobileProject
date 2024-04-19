@@ -22,7 +22,8 @@ const style = StyleSheet.create({
         textAlignVertical: "center",
         fontSize: 24,
         marginTop: 5,
-        height: 30
+        height: 30,
+        paddingHorizontal: '20%'
     })
 })
 
