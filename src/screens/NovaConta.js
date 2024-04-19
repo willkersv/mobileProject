@@ -30,12 +30,12 @@ const NovaConta = (props) => {
     let senha = txtSenha
     let repSenha = txtRepSenha
 
-    //VALIDA O EMAIL
+    //Validação do email
     const validateEmail = (email) => {
-        const regex = /\S+@\S+\.\S+/
-        const emailIsValid = regex.test(email)
-        setisEmailValid(emailIsValid)
-        return emailIsValid
+      const regex = /\S+@\S+\.\S+/
+      const emailIsValid = regex.test(email)
+      setisEmailValid(emailIsValid)
+      return emailIsValid
     }
 
     //O email também é verificado, assim como na tela de login
@@ -49,20 +49,13 @@ const NovaConta = (props) => {
       setWarn('O campo repetir senha difere da senha')
     }
     console.log("\nEmail = " + email + "\nSenha = " + senha)
-
- 
   }
-
-  //Faz a verificação da senha  && email != ''
-
 
   return (
     <View style={styles.container}>
       <View style={styles.cInput}>
         <LabelTextInput label='E-mail' placeHolder='jurandir.pereira@hotmail.com' placeholderTextColor='#3F92C5' inputValue={txtEmail} inputType='EMAIL' onChangeText={(txtEmail) => setEmail(txtEmail)}/>
-
         <LabelTextInput label='Senha' placeHolder='*********' placeholderTextColor='#3F92C5' inputValue={txtSenha} inputType='PSW' onChangeText={(txtSenha) => setSenha(txtSenha)}/>
-
         <LabelTextInput label='Repetir Senha' inputValue={txtRepSenha} inputType='PSW' onChangeText={(txtRepSenha) => setRepSenha(txtRepSenha)}/>
       </View>
 
@@ -73,8 +66,7 @@ const NovaConta = (props) => {
       <View style={styles.cButton}>
         <Button txtButton="CADASTRAR" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={handleLogin}/>
       </View>
-
-
+  
       <StatusBar style="auto" />
     </View>
   );
