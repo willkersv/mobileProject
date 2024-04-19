@@ -5,7 +5,6 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
-import MenuButton from '../components/MenuButton.js';
 import SearchInput from '../components/SearchInput.js';
 import CardResearch from '../components/CardResearch.js';
 import Button from '../components/Button.js';
@@ -36,9 +35,6 @@ const Home = () => {
 
     return(
         <View style={styles.container}>
-            <View style={styles.cTop}>
-                <MenuButton menuColor="#FFFFFF" size={50} />
-            </View>
 
             <View style={styles.cContent}>
                 <SearchInput placeholder="Insira o termo de busca..." value={txtSearch} onChangeText={setTxtSearch} />
