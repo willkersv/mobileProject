@@ -8,6 +8,7 @@ import Button from "../components/Button.js";
 import LabelTextInput from "../components/LabelTextInput.js";
 import TextWarn from "../components/TextWarn.js";
 import Coleta from "./Coleta.js";
+import Pesquisas from "./Pesquisas.js";
 
 const Login = (props) => {
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
@@ -41,6 +42,7 @@ const Login = (props) => {
     //POR ENQUANTO SE FOR UM EMAIL VALIDO JA CONSEGUE ACESSO A PAGINA HOME
     if (validateEmail(email)) {
       console.log("Direcionado para a tela HOME");
+      props.navigation.navigate('Drawer');
     } else {
       console.log("E-mail e/ou senha inválidos.");
     }
@@ -103,13 +105,15 @@ const Login = (props) => {
           txtButton="Criar minha conta"
           buttonColor="#419ED7"
           txtColor="#FFFFFF"
-          functionButton={()=>{toScreenCreateAccount()}}
+          functionButton={() => {
+            toScreenCreateAccount();
+          }}
         />
         <Button
           txtButton="Esqueci minha senha"
           buttonColor="#B0CCDE"
           txtColor="#FFFFFF"
-          functionButton={toScreenForgetPsw}
+          functionButton={toScreenForgetPsw()}
         />
       </View>
 
