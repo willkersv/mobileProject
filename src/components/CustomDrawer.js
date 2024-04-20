@@ -6,6 +6,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const CustomDrawer = (props) => {
 
+  const {email} = props
+
   const [fontsLoaded] = useFonts({
     'AveriaLibre': require('../../assets/fonts/AveriaLibre-Regular.ttf'),
   });
@@ -16,8 +18,8 @@ const CustomDrawer = (props) => {
 
   return (
     <DrawerContentScrollView {...props}>
-      <View>
-        <Text style={styles.email}>usuario@dominio.com</Text>
+      <View style={styles.cTxt}>
+        <Text style={styles.email}>{email}</Text>
       </View>
       <View style={styles.lineStyle} />
       <DrawerItemList {...props} />
@@ -26,18 +28,18 @@ const CustomDrawer = (props) => {
         labelStyle={styles.item}
         icon= {() => <Icon style={styles.icon} name='logout' size={32} color="#FFFFFF"/>}
         label="Sair" 
-        onPress={() => { props.navigation.popToTop() }} />
+        onPress={() => { props.navigation.popToTop() }}
+      />
         
     </DrawerContentScrollView>
   )
 }
 
-export default CustomDrawer;
-
 const styles = StyleSheet.create({
   lineStyle: {
     borderWidth: 1,
-    borderColor: '#ECF8FF',
+    borderColor: '#FFFFFF',
+    backgroundColor: "#FFFFFF",
     marginTop: 20,
     marginLeft: 45,
     marginRight: 45,
@@ -46,17 +48,22 @@ const styles = StyleSheet.create({
   email: {
     fontFamily: 'AveriaLibre',
     fontSize: 24,
-    color: 'white',
+    color: '#FFFFFF',
     alignSelf: 'center',
     marginTop: 5
   },
   item: {
     fontFamily: 'AveriaLibre',
     fontSize: 24,
-    color: 'white',
+    color: '#FFFFFF',
   },
   icon:{
     marginLeft:24, 
     marginRight:-24
+  },
+  cTxt:{
+    marginTop: 10
   }
 });
+
+export default CustomDrawer;
