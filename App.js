@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import Login from "./src/screens/Login.js";
 import Home from "./src/screens/Home.js";
 import Drawer from './src/screens/Drawer.js';
-import Pesquisas from './src/screens/Pesquisas.js';
 
 const Stack = createStackNavigator();
 
@@ -17,7 +16,6 @@ const App = () => {
       <Stack.Navigator initialRouteName="Drawer" screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Drawer" component={Drawer} />
-        <Stack.Screen name="Pesquisas" component={Pesquisas} />
         <Stack.Screen name="Home" component={Home} />
       </Stack.Navigator>
     </NavigationContainer>
