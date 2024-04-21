@@ -16,19 +16,11 @@ const Agradecimentos = (props) => {
     return null;
   }
 
-  let setNota = 0;
-
-  const teste = (props) => {
-    props.navigation.popToTop();
-  };
-
   //Codigo
   return (
     <View style={styles.cTexto}>
-      <TouchableOpacity style={styles.container} onPress={() => teste(props)}>
-        <Text style={styles.texto}>Obrigado por participar da pesquisa!</Text>
-        <Text style={styles.texto}>Aguardamos você no próximo ano!</Text>
-      </TouchableOpacity>
+      <Text style={styles.texto}>Obrigado por participar da pesquisa!</Text>
+      <Text style={styles.texto}>Aguardamos você no próximo ano!</Text>
       <StatusBar style="auto" />
     </View>
   );
@@ -46,13 +38,13 @@ const styles = StyleSheet.create({
     fontFamily: "AveriaLibre",
     textAlign: "center",
     fontSize: 30,
-    marginVertical:20
+    marginVertical: 20,
   },
   cTexto: {
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
-    
+    backgroundColor: "#372775",
   },
 });
 

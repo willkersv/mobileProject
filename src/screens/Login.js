@@ -9,6 +9,7 @@ import LabelTextInput from "../components/LabelTextInput.js";
 import TextWarn from "../components/TextWarn.js";
 import Coleta from "./Coleta.js";
 import Pesquisas from "./Pesquisas.js";
+import NovaConta from "./NovaConta.js";
 
 const Login = (props) => {
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
@@ -51,11 +52,12 @@ const Login = (props) => {
 
   const toScreenForgetPsw = () => {
     console.log("Direcionado para a tela ESQUECEU SENHA");
+    // props.navigation.navigate(Coleta);
   };
 
   const toScreenCreateAccount = () => {
     console.log("Direcionado para a telaColeta");
-    props.navigation.navigate(Coleta);
+    props.navigation.navigate(NovaConta);
   };
 
   //Codigo

@@ -16,18 +16,9 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator
         initialRouteName="Login"
-        screenOptions={{
-          headerStyle: { backgroundColor: "#2B1D62", height: 70 },
-          headerTitle: "Nova Conta",
-          headerTintColor: "#573fba",
-          headerTitleStyle: {
-            color: "#FFFFFF",
-            fontSize: 30,
-            fontFamily: "AveriaLibre",
-          },
-        }}
+        screenOptions={{headerShown:false}}
       >
-        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Login" component={Login}/>
         <Stack.Screen name="Drawer" component={Drawer} />
         {/* <Stack.Screen name="Drawer" component={Drawer} /> */}
         <Stack.Screen name="Pesquisas" component={Pesquisas} />

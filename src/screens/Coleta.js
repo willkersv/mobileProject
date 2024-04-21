@@ -38,7 +38,9 @@ const Coleta = (props) => {
     }
     console.log("Nota é "+ setNota);
     // props.navigation.goBack();
-    props.navigation.navigate(Agradecimentos);
+    props.navigation.navigate(Agradecimentos)
+    setTimeout(()=> props.navigation.goBack(), 3000)
+  
   };
 
   //Codigo
