@@ -9,7 +9,7 @@ import LabelTextInput from '../components/LabelTextInput.js';
 import TextWarn from '../components/TextWarn.js';
 
 
-const Login = () => {
+const Login = (props) => {
 
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
@@ -42,6 +42,7 @@ const Login = () => {
     //POR ENQUANTO SE FOR UM EMAIL VALIDO JA CONSEGUE ACESSO A PAGINA HOME
     if(validateEmail(email)){
       console.log("Direcionado para a tela HOME")
+      props.navigation.navigate('ModificarPesquisa')
     }
     else{
       console.log("E-mail e/ou senha inválidos.")
