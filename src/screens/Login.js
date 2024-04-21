@@ -43,7 +43,7 @@ const Login = (props) => {
     //POR ENQUANTO SE FOR UM EMAIL VALIDO JA CONSEGUE ACESSO A PAGINA HOME
     if (validateEmail(email)) {
       console.log("Direcionado para a tela HOME");
-      props.navigation.navigate('Drawer');
+      props.navigation.navigate("Drawer");
     } else {
       console.log("E-mail e/ou senha inválidos.");
     }
