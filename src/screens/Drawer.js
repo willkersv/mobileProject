@@ -1,12 +1,10 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 import CustomDrawer from "../components/CustomDrawer";
-import Pesquisas from "./Pesquisas";
 import * as ScreenOrientation from "expo-screen-orientation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useFonts } from "expo-font";
 import Home from "./Home";
-import Coleta from "./Coleta";
 
 const DrawerNavigator = createDrawerNavigator();
 
@@ -44,7 +42,7 @@ const Drawer = () => {
       />
       <DrawerNavigator.Screen
         name="Pesquisas"
-        component={Pesquisas}
+        component={Home}
         options={{
           headerStyle: {
             backgroundColor: "#2B1D62",
@@ -58,33 +56,6 @@ const Drawer = () => {
           drawerActiveBackgroundColor: "#2B1F5C",
           drawerInactiveBackgroundColor: "#2B1F5C",
           drawerLabel: () => <Text style={styles.label}>Pesquisas</Text>,
-          drawerIcon: () => (
-            <Icon
-              style={styles.icon}
-              name="description"
-              size={32}
-              color="#FFFFFF"
-            />
-          ),
-        }}
-      />
-      <DrawerNavigator.Screen
-        name="Coleta"
-        component={Coleta}
-        options={{
-          headerStyle: {
-            backgroundColor: "#2B1D62",
-          },
-          headerTitleStyle: {
-            color: "#FFFFFF",
-            fontSize: 25,
-            fontFamily: "AveriaLibre",
-          },
-          headerShown: false,
-          headerTintColor: "white",
-          drawerActiveBackgroundColor: "#2B1F5C",
-          drawerInactiveBackgroundColor: "#2B1F5C",
-          drawerLabel: () => <Text style={styles.label}>Coleta</Text>,
           drawerIcon: () => (
             <Icon
               style={styles.icon}

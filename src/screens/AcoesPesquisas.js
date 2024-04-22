@@ -1,15 +1,11 @@
-import { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
-import SearchInput from "../components/SearchInput.js";
 import CardActions from "../components/CardActions.js";
-import Button from "../components/Button.js";
 
-const Home = () => {
-  //Variáveis
-  const [txtSearch, setTxtSearch] = useState("");
 
+const AcoesPesquisas = () => {
+ 
   //Fonte
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
@@ -17,13 +13,6 @@ const Home = () => {
   if (!fontsLoaded) {
     return null;
   }
-
-  //Funcoes
-  const searchCard = () => {};
-
-  const toNewResearch = () => {
-    console.log("BOTAO NOVA PESQUISA: " + txtSearch);
-  };
 
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
@@ -62,4 +51,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default AcoesPesquisas;

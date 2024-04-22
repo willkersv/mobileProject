@@ -1,7 +1,7 @@
-import { View, TouchableOpacity, StyleSheet, Image, Text } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
-const CardResearch = (props) => {
+const CardActions = (props) => {
   const icone = props.icone;
   const title = props.title;
 
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     textAlign: "center",
 
-    backgroundColor: "#312464",
+    backgroundColor: "#2B1D62",
     borderRadius: 20,
 
     shadowColor: "#000000",
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CardResearch;
+export default CardActions;

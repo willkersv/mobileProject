@@ -7,8 +7,6 @@ import Icon from "react-native-vector-icons/MaterialIcons";
 import Button from "../components/Button.js";
 import LabelTextInput from "../components/LabelTextInput.js";
 import TextWarn from "../components/TextWarn.js";
-import Coleta from "./Coleta.js";
-import Pesquisas from "./Pesquisas.js";
 import NovaConta from "./NovaConta.js";
 
 const Login = (props) => {
