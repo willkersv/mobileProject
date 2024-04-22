@@ -1,27 +1,37 @@
-import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StatusBar } from 'expo-status-bar';
-import Login from "./src/screens/Login.js";
+import "react-native-gesture-handler";
+import Coleta from "./src/screens/Coleta";
+import Login from "./src/screens/Login";
 import Home from "./src/screens/Home.js";
-import Drawer from './src/screens/Drawer.js';
-import ModificarPesquisa from './src/screens/ModificarPesquisa.js';
+import Drawer from "./src/screens/Drawer.js";
+import AcoesPesquisas from "./src/screens/AcoesPesquisas.js";
+import Agradecimentos from "./src/screens/Agradecimentos";
+import NovaConta from "./src/screens/NovaConta.js";
+import ModificarPesquisa from './src/screens/ModificarPesquisa';
+import Relatorio from './src/screens/Relatorio';
 
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-
     <NavigationContainer>
-      <StatusBar hidden={true} />
-      <Stack.Navigator initialRouteName="Drawer" screenOptions={{ headerShown: false }}>
+      <Stack.Navigator
+        initialRouteName="Login"
+        screenOptions={{ headerShown: false }}
+      >
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Drawer" component={Drawer} />
+        <Stack.Screen name="AcoesPesquisas" component={AcoesPesquisas} />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} />
+        <Stack.Screen name="Coleta" component={Coleta} />
+        <Stack.Screen name="Agradecimentos" component={Agradecimentos} />
+        <Stack.Screen name="NovaConta" component={NovaConta} />
+        <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa}/>
+        <Stack.Screen name="Relatorio" component={Relatorio}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
-
   );
 };
 

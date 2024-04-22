@@ -44,14 +44,13 @@ const styles = StyleSheet.create({
     height: 200,
     backgroundColor: '#2B1F5C',
     alignItems: 'center',
-    paddingTop: 15,
+    justifyContent:'center',
     padding: 25,
     elevation: 5,
   },
   container: {
     justifyContent: 'space-between',
     flexDirection: 'row',
-    marginTop: 0,
   },
   buttonSim:{
     paddingRight: 20,
