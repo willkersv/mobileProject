@@ -9,9 +9,22 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LabelTextInput from '../components/LabelTextInput.js'
 import LabelTextInput_Icon from '../components/LabelTextInput_Icon.js'
 import Button from '../components/Button.js';
+import PopUp from '../components/PopUp.js';
 
 const ModificarPesquisa = () => {
+    
+  //referente ao modal de exclusao=================
+    const [modalVisible, setModalVisible] = useState(false);
 
+    const openModal = () => {
+      setModalVisible(true);
+    };
+  
+    const closeModal = () => {
+      setModalVisible(false);
+    };
+    //=============================================
+  
     //Fonte
     const [fontsLoaded] = useFonts({
         'AveriaLibre': require('../../assets/fonts/AveriaLibre-Regular.ttf'),
@@ -24,10 +37,6 @@ const ModificarPesquisa = () => {
     const SalvarModificacao = () => {
         console.log("BOTAO SALVAR MODIFICACAO")
     }
-
-    const ApagarModificacao = () => {
-      console.log("BOTAO APAGAR MODIFICACAO")
-  }
 
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
@@ -43,12 +52,12 @@ const ModificarPesquisa = () => {
                 <Button txtButton="Salvar" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={SalvarModificacao}/>
             </View>
             <TouchableOpacity
-              onPress={ApagarModificacao}
+              onPress={openModal}
               style={styles.touchableOpacityStyle}>
-
               <Icon name='delete' size={35}  color="#FFFFFF"/>
               <Text style={styles.botao}>Apagar</Text>
             </TouchableOpacity>
+            <PopUp modalVisible={modalVisible} closeModal={closeModal}/>
     </View>
 
     )
