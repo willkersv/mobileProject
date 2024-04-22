@@ -8,6 +8,7 @@ import Drawer from "./src/screens/Drawer.js";
 import Pesquisas from "./src/screens/Pesquisas.js";
 import Agradecimentos from "./src/screens/Agradecimentos";
 import NovaConta from "./src/screens/NovaConta.js";
+import AcoesPesquisa from "./src/screens/Acoespesquisa.js";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ const App = () => {
         <Stack.Screen name="Coleta" component={Coleta} />
         <Stack.Screen name="Agradecimentos" component={Agradecimentos} />
         <Stack.Screen name="NovaConta" component={NovaConta} />
+        <Stack.Screen name="AcoesPesquisa" component={AcoesPesquisa} />
       </Stack.Navigator>
     </NavigationContainer>
   );

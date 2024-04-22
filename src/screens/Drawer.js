@@ -1,9 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { View, Text, StyleSheet } from "react-native";
 import CustomDrawer from "../components/CustomDrawer";
-import Login from "./Login";
 import Pesquisas from "./Pesquisas";
-import NovaConta from "./NovaConta";
 import * as ScreenOrientation from "expo-screen-orientation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useFonts } from "expo-font";
@@ -44,7 +42,6 @@ const Drawer = () => {
           drawerLabel: () => null
         }}
       />
-      
       <DrawerNavigator.Screen
         name="Pesquisas"
         component={Pesquisas}
