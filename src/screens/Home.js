@@ -5,8 +5,9 @@ import * as ScreenOrientation from 'expo-screen-orientation';
 import SearchInput from '../components/SearchInput.js';
 import CardResearch from '../components/CardResearch.js';
 import Button from '../components/Button.js';
+import ModificarPesquisa from './ModificarPesquisa.js';
 
-const Home = () => {
+const Home = (props) => {
 
     //Variáveis
     const [txtSearch, setTxtSearch] = useState('')
@@ -26,6 +27,7 @@ const Home = () => {
 
     const toNewResearch = () => {
         console.log("BOTAO NOVA PESQUISA: " + txtSearch)
+        // props.navigation.navigate(NovaPesquisa);
     }
 
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
@@ -37,7 +39,7 @@ const Home = () => {
                 <SearchInput placeholder="Insira o termo de busca..." value={txtSearch} onChangeText={setTxtSearch} />
                 
                 <View style={styles.cCards}>
-                    <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023" />
+                    <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023"/>
                     <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022" />
                     <CardResearch img={require('../../assets/images/girl.png')} title="MENINAS CPU" date="01/04/2022" />
                     <CardResearch img={require('../../assets/images/dontKnow.png')} title="PESQUISA" date="32/13/2024" />

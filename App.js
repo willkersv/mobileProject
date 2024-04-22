@@ -9,6 +9,7 @@ import AcoesPesquisas from "./src/screens/AcoesPesquisas.js";
 import Agradecimentos from "./src/screens/Agradecimentos";
 import NovaConta from "./src/screens/NovaConta.js";
 import ModificarPesquisa from './src/screens/ModificarPesquisa';
+import Relatorio from './src/screens/Relatorio';
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="AcoesPesquisas"
+        initialRouteName="Login"
         screenOptions={{ headerShown: false }}
       >
         <Stack.Screen name="Login" component={Login} />
@@ -27,6 +28,7 @@ const App = () => {
         <Stack.Screen name="Agradecimentos" component={Agradecimentos} />
         <Stack.Screen name="NovaConta" component={NovaConta} />
         <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa}/>
+        <Stack.Screen name="Relatorio" component={Relatorio}/>
         
       </Stack.Navigator>
     </NavigationContainer>

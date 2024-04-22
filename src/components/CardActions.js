@@ -1,13 +1,17 @@
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
+import ModificarPesquisa from "../screens/ModificarPesquisa";
+import Coleta from "../screens/Coleta";
+import Relatorio from "../screens/Relatorio";
 
 const CardActions = (props) => {
   const icone = props.icone;
   const title = props.title;
+  const page = props.page;
 
   return (
     <View style={styles.cCard}>
-      <TouchableOpacity style={styles.card} onPress={()=> console.log("oi testando")}>
+      <TouchableOpacity style={styles.card} onPress={() => props.onPress(page)}>
         <Icon style={styles.icon} name={icone} size={80} color="#FFFFFF" />
         <Text style={styles.txtTitle}>{title}</Text>
       </TouchableOpacity>

@@ -14,7 +14,7 @@ const Login = (props) => {
 
   const [txtEmail, setTxtEmail] = useState("");
   const [txtSenha, setTxtSenha] = useState("");
-  const [isLoginValid, setIsLoginValid] = useState(false);
+  const [isLoginValid, setIsLoginValid] = useState(true);
 
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
@@ -50,11 +50,10 @@ const Login = (props) => {
 
   const toScreenForgetPsw = () => {
     console.log("Direcionado para a tela ESQUECEU SENHA");
-    // props.navigation.navigate(Coleta);
+    // props.navigation.navigate(RecuperarSenha);
   };
 
   const toScreenCreateAccount = () => {
-    console.log("Direcionado para a telaColeta");
     props.navigation.navigate(NovaConta);
   };
 
@@ -113,7 +112,9 @@ const Login = (props) => {
           txtButton="Esqueci minha senha"
           buttonColor="#B0CCDE"
           txtColor="#FFFFFF"
-          functionButton={toScreenForgetPsw()}
+          functionButton={() => {
+            toScreenForgetPsw();
+          }}
         />
       </View>
 

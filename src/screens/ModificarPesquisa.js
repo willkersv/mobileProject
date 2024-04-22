@@ -2,14 +2,29 @@ import { useState } from "react";
 import { View,StyleSheet, Image, Text, TouchableOpacity, TextInput } from 'react-native'
 import { useFonts } from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import LabelTextInput from '../components/LabelTextInput.js'
 import LabelTextInput_Icon from '../components/LabelTextInput_Icon.js'
 import Button from '../components/Button.js';
+import PopUp from '../components/PopUp.js';
 
 const ModificarPesquisa = () => {
+    
+  //referente ao modal de exclusao=================
+    const [modalVisible, setModalVisible] = useState(false);
 
+    const openModal = () => {
+      setModalVisible(true);
+    };
+  
+    const closeModal = () => {
+      setModalVisible(false);
+    };
+    //=============================================
+  
     //Fonte
     const [fontsLoaded] = useFonts({
         'AveriaLibre': require('../../assets/fonts/AveriaLibre-Regular.ttf'),
@@ -23,10 +38,6 @@ const ModificarPesquisa = () => {
         console.log("BOTAO SALVAR MODIFICACAO")
     }
 
-    const ApagarModificacao = () => {
-      console.log("BOTAO APAGAR MODIFICACAO")
-  }
-
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
     return (
@@ -36,17 +47,17 @@ const ModificarPesquisa = () => {
                 <LabelTextInput_Icon style={styles.label} label="Data" placeHolder="16/02/2024" inputType="DATA"/>
 
                 <Text style={styles.label}>Imagem</Text>
-                <Image style={{width:250, height:75, marginBottom:30}} label='Imagem' source={require('../images/Imagem_projeto.png')}/>
+                <Image style={{width:250, height:75, marginBottom:30}} label='Imagem' source={require('../../assets/images/Imagem_projeto.png')}/>
                 
                 <Button txtButton="Salvar" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={SalvarModificacao}/>
             </View>
             <TouchableOpacity
-              onPress={ApagarModificacao}
+              onPress={openModal}
               style={styles.touchableOpacityStyle}>
-
               <Icon name='delete' size={35}  color="#FFFFFF"/>
               <Text style={styles.botao}>Apagar</Text>
             </TouchableOpacity>
+            <PopUp modalVisible={modalVisible} closeModal={closeModal}/>
     </View>
 
     )
@@ -82,7 +93,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       right: 80,
-      bottom: 15
+      bottom: 20
     },
     botao: {
       fontFamily: "AveriaLibre",
