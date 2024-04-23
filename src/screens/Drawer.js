@@ -49,7 +49,7 @@ const Drawer = () => {
           },
           headerTitleStyle: {
             color: "#FFFFFF",
-            fontSize: 25,
+            fontSize: 30,
             fontFamily: "AveriaLibre",
           },
           headerTintColor: "white",
