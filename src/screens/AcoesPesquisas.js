@@ -18,13 +18,13 @@ const AcoesPesquisas = (props) => {
   const handleNavigate = (page) => {
     switch(page) {
       case 'Modificar':
-        props.navigation.navigate('ModificarPesquisa');
+        props.navigation.navigate('Modificar Pesquisa');
         break;
       case 'Coletar Dados':
         props.navigation.navigate('Coleta');
         break;
       case 'Relatório':
-        props.navigation.navigate('Relatorio');
+        props.navigation.navigate('Relatório');
         break;
       default:
         break;

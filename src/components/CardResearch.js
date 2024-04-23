@@ -4,10 +4,11 @@ const CardResearch = (props) => {
     const img = props.img
     const title = props.title
     const date = props.date
+    const page = props.page;
 
     return(
         <View style={styles.cCard}>
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={() => props.onPress(page)}>
                 <Image style={styles.imgStyle} source={img}/>
                 <View style={styles.cTxt}>
                     <Text style={styles.txtTitle}>{title}</Text>

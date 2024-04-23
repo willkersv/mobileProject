@@ -32,6 +32,14 @@ const Home = (props) => {
 
     ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
+    const handleNavigate = (page) => {
+        switch(page) {
+          case 'Carnaval':
+            props.navigation.navigate('Carnaval');
+            break;
+        }
+      }
+
     return(
         <View style={styles.container}>
 
@@ -39,10 +47,10 @@ const Home = (props) => {
                 <SearchInput placeholder="Insira o termo de busca..." value={txtSearch} onChangeText={setTxtSearch} />
                 
                 <View style={styles.cCards}>
-                    <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023"/>
-                    <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022" />
-                    <CardResearch img={require('../../assets/images/girl.png')} title="MENINAS CPU" date="01/04/2022" />
-                    <CardResearch img={require('../../assets/images/dontKnow.png')} title="PESQUISA" date="32/13/2024" />
+                    <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023" onPress={() => handleNavigate('Carnaval')}/>
+                    <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022"  onPress={() => handleNavigate('Carnaval')}/>
+                    <CardResearch img={require('../../assets/images/girl.png')} title="MENINAS CPU" date="01/04/2022" onPress={() => handleNavigate('Carnaval')}/>
+                    <CardResearch img={require('../../assets/images/dontKnow.png')} title="PESQUISA" date="32/13/2024" onPress={() => handleNavigate('Carnaval')}/>
                 </View>
 
                 <View style={styles.button}>
