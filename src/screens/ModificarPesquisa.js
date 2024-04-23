@@ -1,9 +1,6 @@
 import { useState } from "react";
-import { View,StyleSheet, Image, Text, TouchableOpacity, TextInput } from 'react-native'
+import { View,StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import { useFonts } from 'expo-font';
-import * as ScreenOrientation from 'expo-screen-orientation';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import LabelTextInput from '../components/LabelTextInput.js'
@@ -37,8 +34,6 @@ const ModificarPesquisa = () => {
     const SalvarModificacao = () => {
         console.log("BOTAO SALVAR MODIFICACAO")
     }
-
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
     return (
         <View style={styles.container}>

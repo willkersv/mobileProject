@@ -1,18 +1,14 @@
-import { StatusBar } from "expo-status-bar";
-
 import {
   View,
   StyleSheet,
   Text,
   TouchableOpacity,
 } from "react-native";
-import * as ScreenOrientation from "expo-screen-orientation";
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Agradecimentos from "./Agradecimentos";
 
 const Coleta = (props) => {
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
@@ -69,7 +65,6 @@ const Coleta = (props) => {
           <Text style={styles.texto}>Excelente</Text>
         </TouchableOpacity>
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 };

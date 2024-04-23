@@ -1,6 +1,8 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import * as ScreenOrientation from "expo-screen-orientation";
 import "react-native-gesture-handler";
+
 import Coleta from "./src/screens/Coleta";
 import Login from "./src/screens/Login";
 import Home from "./src/screens/Home.js";
@@ -16,6 +18,9 @@ import RecuperarSenha from './src/screens/RecuperarSenha';
 const Stack = createStackNavigator();
 
 const App = () => {
+
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Login" 
@@ -30,7 +35,7 @@ const App = () => {
         <Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false }} />
         <Stack.Screen name="Agradecimentos" component={Agradecimentos} options={{ headerShown: false }} />
         <Stack.Screen name="NovaConta" component={NovaConta} options={{ headerShown: true }} />
-        <Stack.Screen name="Modificar Pesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
+        <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
         <Stack.Screen name="Relatório" component={Relatorio} options={{ headerShown: true }}/>
         <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ headerShown: true }}/>
         {/*<Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>*/}

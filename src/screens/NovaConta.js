@@ -1,15 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
-import * as ScreenOrientation from 'expo-screen-orientation';
+
 import LabelTextInput from '../components/LabelTextInput';
 import TextWarn from '../components/TextWarn';
 import Button from '../components/Button';
 
 const NovaConta = (props) => {
-
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
   const [fontsLoaded] = useFonts({
     'AveriaLibre': require('../../assets/fonts/AveriaLibre-Regular.ttf'),
@@ -76,8 +73,6 @@ const NovaConta = (props) => {
       <View style={styles.cButtons}>
         <Button txtButton="CADASTRAR" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={handleLogin}/>
       </View>
-  
-      <StatusBar style="auto" />
     </View>
   );
 }

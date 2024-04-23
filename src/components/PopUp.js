@@ -3,6 +3,10 @@ import Button from '../components/Button.js';
 
 const PopUp = ({modalVisible, closeModal}) => {
 
+  const deleteResearch = () => {
+    console.log("PESQUISA APAGADA!")
+  }
+
   return(
         <View style={styles.centralized}>
           <Modal animationType="fade" transparent={true}
@@ -14,7 +18,7 @@ const PopUp = ({modalVisible, closeModal}) => {
                 <Text style={styles.modalText}>Tem certeza de apagar essa pesquisa?</Text>
                 <View style={styles.container}>
                   <View style={styles.buttonSim}>
-                    <Button txtButton="SIM" buttonColor="#FF8383" txtColor="#FFFFFF" buttonHeight={71}/>
+                    <Button txtButton="SIM" buttonColor="#FF8383" txtColor="#FFFFFF" buttonHeight={71} functionButton={deleteResearch}/>
                   </View>
                   <View style={styles.buttonCancelar}>
                     <Button txtButton="CANCELAR" buttonColor="#3F92C5" txtColor="#FFFFFF" buttonHeight={71} functionButton={closeModal}/>  

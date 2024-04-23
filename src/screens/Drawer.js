@@ -1,15 +1,14 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Text, StyleSheet } from "react-native";
 import CustomDrawer from "../components/CustomDrawer";
-import * as ScreenOrientation from "expo-screen-orientation";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { useFonts } from "expo-font";
+
 import Home from "./Home";
 
 const DrawerNavigator = createDrawerNavigator();
 
 const Drawer = () => {
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
