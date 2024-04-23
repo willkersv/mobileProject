@@ -22,6 +22,7 @@ const NovaConta = (props) => {
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
 
+
   const handleLogin = () => {
     let email = txtEmail
     let senha = txtSenha
@@ -31,6 +32,7 @@ const NovaConta = (props) => {
     const validateEmail = (email) => {
       const regex = /\S+@\S+\.\S+/
       const emailIsValid = regex.test(email)
+
       setIsEmailValid(emailIsValid)
       return emailIsValid
     }
@@ -43,22 +45,27 @@ const NovaConta = (props) => {
 
     //O email também é verificado, assim como na tela de login
     if(validateEmail(email) && validatePassword(senha, repSenha)){
+
       console.log('Acesso concedido')
       console.log("Direcionado para a tela Login")
       props.navigation.navigate('Login')
     }
+
+
     console.log("\nEmail = " + email + "\nSenha = " + senha)
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.cInput}>
+
         <LabelTextInput label='E-mail' placeHolder='jurandir.pereira@hotmail.com' inputValue={txtEmail} inputType='EMAIL' onChangeText={(txtEmail) => setEmail(txtEmail)}/>
         <LabelTextInput label='Senha' placeHolder='*********' inputValue={txtSenha} inputType='PSW' onChangeText={(txtSenha) => setSenha(txtSenha)}/>
         <LabelTextInput label='Repetir Senha' inputValue={txtRepSenha} inputType='PSW' onChangeText={(txtRepSenha) => setRepSenha(txtRepSenha)}/>
       </View>
 
       <View style={styles.cWarn}>
+
         {!isEmailValid && <TextWarn txt='E-mail inválido.' isVisible={!isEmailValid}/>} 
         {!isPasswordValid && <TextWarn txt='O campo repetir senha difere da senha' isVisible={!isPasswordValid}/>} 
       </View>
@@ -85,6 +92,7 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center'
   },
+
   cWarn:{
     flexDirection: 'row',
     justifyContent: 'flex-start',
