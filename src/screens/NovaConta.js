@@ -22,8 +22,9 @@ const NovaConta = (props) => {
   const [txtEmail, setEmail] = useState('')
   const [txtSenha, setSenha] = useState('')
   const [txtRepSenha, setRepSenha] = useState('')
-  const [txtWarn, setWarn] = useState('')
-  const [isEmailValid, setisEmailValid] = useState(false);
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+
 
   const handleLogin = () => {
     let email = txtEmail
@@ -34,36 +35,45 @@ const NovaConta = (props) => {
     const validateEmail = (email) => {
       const regex = /\S+@\S+\.\S+/
       const emailIsValid = regex.test(email)
-      setisEmailValid(emailIsValid)
+
+      setIsEmailValid(emailIsValid)
       return emailIsValid
     }
 
+    const validatePassword= (senha, repSenha) => {
+      const PswValid = senha === repSenha;
+      setIsPasswordValid(PswValid)
+      return PswValid
+    }
+
     //O email também é verificado, assim como na tela de login
-    if(validateEmail(email) && senha == repSenha){
+    if(validateEmail(email) && validatePassword(senha, repSenha)){
+
       console.log('Acesso concedido')
       console.log("Direcionado para a tela Login")
       props.navigation.navigate('Login')
     }
-    else{
-      console.log("E-mail e/ou senha inválidos")
-      setWarn('O campo repetir senha difere da senha')
-    }
+
+
     console.log("\nEmail = " + email + "\nSenha = " + senha)
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.cInput}>
-        <LabelTextInput label='E-mail' placeHolder='jurandir.pereira@hotmail.com' placeholderTextColor='#3F92C5' inputValue={txtEmail} inputType='EMAIL' onChangeText={(txtEmail) => setEmail(txtEmail)}/>
-        <LabelTextInput label='Senha' placeHolder='*********' placeholderTextColor='#3F92C5' inputValue={txtSenha} inputType='PSW' onChangeText={(txtSenha) => setSenha(txtSenha)}/>
+
+        <LabelTextInput label='E-mail' placeHolder='jurandir.pereira@hotmail.com' inputValue={txtEmail} inputType='EMAIL' onChangeText={(txtEmail) => setEmail(txtEmail)}/>
+        <LabelTextInput label='Senha' placeHolder='*********' inputValue={txtSenha} inputType='PSW' onChangeText={(txtSenha) => setSenha(txtSenha)}/>
         <LabelTextInput label='Repetir Senha' inputValue={txtRepSenha} inputType='PSW' onChangeText={(txtRepSenha) => setRepSenha(txtRepSenha)}/>
       </View>
 
       <View style={styles.cWarn}>
-        <TextWarn txt='O campo repetir senha difere da senha' isVisible={txtWarn}/> 
+
+        {!isEmailValid && <TextWarn txt='E-mail inválido.' isVisible={!isEmailValid}/>} 
+        {!isPasswordValid && <TextWarn txt='O campo repetir senha difere da senha' isVisible={!isPasswordValid}/>} 
       </View>
 
-      <View style={styles.cButton}>
+      <View style={styles.cButtons}>
         <Button txtButton="CADASTRAR" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={handleLogin}/>
       </View>
   
@@ -87,8 +97,10 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'center'
   },
-  cWarn: {
-    marginBottom: 15,
+
+  cWarn:{
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
   },
   cButtons: {
     marginTop: 20,
