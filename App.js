@@ -33,7 +33,7 @@ const App = () => {
         <Stack.Screen name="Modificar Pesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
         <Stack.Screen name="Relatório" component={Relatorio} options={{ headerShown: true }}/>
         <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ headerShown: true }}/>
-        //<Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>
+        {/*<Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>*/}
 
       </Stack.Navigator>
     </NavigationContainer>
