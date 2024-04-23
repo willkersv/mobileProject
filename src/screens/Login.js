@@ -52,10 +52,12 @@ const Login = (props) => {
 
   const toScreenForgetPsw = () => {
     console.log("Direcionado para a tela ESQUECEU SENHA")
+    props.navigation.navigate('RecuperarSenha')
   }
 
   const toScreenCreateAccount = () => {
     console.log("Direcionado para a tela CRIAR CONTA")
+    props.navigation.navigate('NovaConta')    
   }
 
   //Codigo
