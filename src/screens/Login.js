@@ -49,13 +49,15 @@ const Login = (props) => {
   };
 
   const toScreenForgetPsw = () => {
-    console.log("Direcionado para a tela ESQUECEU SENHA");
-    // props.navigation.navigate(RecuperarSenha);
-  };
+
+    console.log("Direcionado para a tela ESQUECEU SENHA")
+    props.navigation.navigate('RecuperarSenha')
+  }
 
   const toScreenCreateAccount = () => {
-    props.navigation.navigate(NovaConta);
-  };
+    console.log("Direcionado para a tela CRIAR CONTA")
+    props.navigation.navigate('NovaConta')    
+  }
 
   //Codigo
   return (
