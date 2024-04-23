@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font';
-import * as ScreenOrientation from 'expo-screen-orientation';
+
 import SearchInput from '../components/SearchInput.js';
 import CardResearch from '../components/CardResearch.js';
 import Button from '../components/Button.js';
-import ModificarPesquisa from './ModificarPesquisa.js';
 
 const Home = (props) => {
 
@@ -21,24 +20,17 @@ const Home = (props) => {
     }
 
     //Funcoes
-    const searchCard = () => {
-
-    }
-
-    const toNewResearch = () => {
-        console.log("BOTAO NOVA PESQUISA: " + txtSearch)
-        // props.navigation.navigate(NovaPesquisa);
-    }
-
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
-
     const handleNavigate = (page) => {
         switch(page) {
-          case 'Carnaval':
-            props.navigation.navigate('Carnaval');
-            break;
+            case 'Carnaval':
+                props.navigation.navigate('Carnaval');
+                break;
+            case 'NovaPesquisa':
+                props.navigation.navigate('NovaPesquisa');
+                console.log("DIRECIONADO PARA NOVAPESQUISA")
+                break;
         }
-      }
+    }
 
     return(
         <View style={styles.container}>
@@ -54,7 +46,7 @@ const Home = (props) => {
                 </View>
 
                 <View style={styles.button}>
-                    <Button txtButton="NOVA PESQUISA" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={toNewResearch} />
+                    <Button txtButton="NOVA PESQUISA" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={() => handleNavigate('NovaPesquisa')} />
                 </View>
             </View>
         </View>
@@ -81,8 +73,8 @@ const styles = StyleSheet.create({
     },
     cCards:{
         flexDirection: "row",
-        height:170,
-        marginVertical:15,
+        height:150,
+        marginVertical:18,
     },
     button:{
         marginVertical: 10

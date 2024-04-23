@@ -49,13 +49,13 @@ const styles = StyleSheet.create({
     },
     imgStyle: {
         flex: 1,
-        width: "100%",
-        height: "100%"
+        width: "80%",
+        height: "80%"
     },
     cChartInfo:{
         flex: 1,
         flexDirection: "column",
-        padding: 10
+        padding: 5
     }
 });
 

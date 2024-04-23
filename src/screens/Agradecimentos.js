@@ -1,12 +1,7 @@
-import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import * as ScreenOrientation from "expo-screen-orientation";
+import { View, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
-import Icon from "react-native-vector-icons/MaterialIcons";
-import Login from "./Login";
 
-const Agradecimentos = (props) => {
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+const Agradecimentos = () => {
 
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
@@ -21,7 +16,6 @@ const Agradecimentos = (props) => {
     <View style={styles.cTexto}>
       <Text style={styles.texto}>Obrigado por participar da pesquisa!</Text>
       <Text style={styles.texto}>Aguardamos você no próximo ano!</Text>
-      <StatusBar style="auto" />
     </View>
   );
 };

@@ -1,6 +1,5 @@
 import { View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
-import * as ScreenOrientation from "expo-screen-orientation";
 import CardActions from "../components/CardActions.js";
 
 const AcoesPesquisas = (props) => {
@@ -12,13 +11,11 @@ const AcoesPesquisas = (props) => {
   if (!fontsLoaded) {
     return null;
   }
-
-  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
   
   const handleNavigate = (page) => {
     switch(page) {
       case 'Modificar':
-        props.navigation.navigate('Modificar Pesquisa');
+        props.navigation.navigate('ModificarPesquisa');
         break;
       case 'Coletar Dados':
         props.navigation.navigate('Coleta');
