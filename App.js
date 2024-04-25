@@ -6,6 +6,7 @@ import "react-native-gesture-handler";
 import Coleta from "./src/screens/Coleta";
 import Login from "./src/screens/Login";
 import Home from "./src/screens/Home.js";
+import NovaPesquisa from './src/screens/NovaPesquisa.js';
 import Drawer from "./src/screens/Drawer.js";
 import AcoesPesquisas from "./src/screens/AcoesPesquisas.js";
 import Agradecimentos from "./src/screens/Agradecimentos";
@@ -13,7 +14,6 @@ import NovaConta from "./src/screens/NovaConta.js";
 import ModificarPesquisa from './src/screens/ModificarPesquisa';
 import Relatorio from './src/screens/Relatorio';
 import RecuperarSenha from './src/screens/RecuperarSenha';
-// import NovaPesquisa from './src/screens/NovaPesquisa';
 
 const Stack = createStackNavigator();
 
@@ -38,8 +38,7 @@ const App = () => {
         <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
         <Stack.Screen name="Relatório" component={Relatorio} options={{ headerShown: true }}/>
         <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ headerShown: true }}/>
-        {/*<Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>*/}
-
+        <Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
