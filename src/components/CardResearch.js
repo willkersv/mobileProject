@@ -4,10 +4,11 @@ const CardResearch = (props) => {
     const img = props.img
     const title = props.title
     const date = props.date
+    const page = props.page
 
     return(
         <View style={styles.cCard}>
-            <TouchableOpacity style={styles.card}>
+            <TouchableOpacity style={styles.card} onPress={() => props.onPress(page)}>
                 <Image style={styles.imgStyle} source={img}/>
                 <View style={styles.cTxt}>
                     <Text style={styles.txtTitle}>{title}</Text>
@@ -21,8 +22,8 @@ const CardResearch = (props) => {
 
 const styles = StyleSheet.create({
     cCard:{
-        height: 180,
-        width: 200,
+        height: 170,
+        width: 190,
         marginRight: 25,
     },
     card:{
@@ -54,7 +55,7 @@ const styles = StyleSheet.create({
     txtTitle:{
         color: "#419ED7",
         fontFamily: "AveriaLibre",
-        fontSize: 26,
+        fontSize: 24,
     },
     txtDate:{
         color: "#aaaaaa",

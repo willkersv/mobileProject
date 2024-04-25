@@ -1,15 +1,12 @@
 import { useState } from 'react';
 import { View, StyleSheet } from 'react-native'
 import { useFonts } from 'expo-font';
-import * as ScreenOrientation from 'expo-screen-orientation';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
 
 import SearchInput from '../components/SearchInput.js';
 import CardResearch from '../components/CardResearch.js';
 import Button from '../components/Button.js';
 
-const Home = () => {
+const Home = (props) => {
 
     //Variáveis
     const [txtSearch, setTxtSearch] = useState('')
@@ -23,15 +20,17 @@ const Home = () => {
     }
 
     //Funcoes
-    const searchCard = () => {
-
+    const handleNavigate = (page) => {
+        switch(page) {
+            case 'Carnaval':
+                props.navigation.navigate('Carnaval');
+                break;
+            case 'NovaPesquisa':
+                props.navigation.navigate('NovaPesquisa');
+                console.log("DIRECIONADO PARA NOVAPESQUISA")
+                break;
+        }
     }
-
-    const toNewResearch = () => {
-        console.log("BOTAO NOVA PESQUISA: " + txtSearch)
-    }
-
-    ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
     return(
         <View style={styles.container}>
@@ -40,14 +39,14 @@ const Home = () => {
                 <SearchInput placeholder="Insira o termo de busca..." value={txtSearch} onChangeText={setTxtSearch} />
                 
                 <View style={styles.cCards}>
-                    <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023" />
-                    <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022" />
-                    <CardResearch img={require('../../assets/images/girl.png')} title="MENINAS CPU" date="01/04/2022" />
-                    <CardResearch img={require('../../assets/images/dontKnow.png')} title="PESQUISA" date="32/13/2024" />
+                    <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023" onPress={() => handleNavigate('Carnaval')}/>
+                    <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022"  onPress={() => handleNavigate('Carnaval')}/>
+                    <CardResearch img={require('../../assets/images/girl.png')} title="MENINAS CPU" date="01/04/2022" onPress={() => handleNavigate('Carnaval')}/>
+                    <CardResearch img={require('../../assets/images/dontKnow.png')} title="PESQUISA" date="32/13/2024" onPress={() => handleNavigate('Carnaval')}/>
                 </View>
 
                 <View style={styles.button}>
-                    <Button txtButton="NOVA PESQUISA" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={toNewResearch} />
+                    <Button txtButton="NOVA PESQUISA" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={() => handleNavigate('NovaPesquisa')} />
                 </View>
             </View>
         </View>
@@ -74,8 +73,8 @@ const styles = StyleSheet.create({
     },
     cCards:{
         flexDirection: "row",
-        height:170,
-        marginVertical:15,
+        height:150,
+        marginVertical:18,
     },
     button:{
         marginVertical: 10

@@ -22,7 +22,7 @@ const LabelTextInput = (props) => {
     return (
         <View style={styles.txtInputContainer}>
             <Text style={styles.label}>{label}</Text>
-            <TextInput style={styles.input} placeholder={placeHolder} value={inputValue} onChangeText={onChangeText} secureTextEntry={secureTextEntry} keyboardType={keyboardType} autoCapitalize='none'/>
+            <TextInput style={styles.input} placeholderTextColor={'#3F92C5'} placeholder={placeHolder} value={inputValue} onChangeText={onChangeText} secureTextEntry={secureTextEntry} keyboardType={keyboardType} autoCapitalize='none'/>
         </View>
     );
 };

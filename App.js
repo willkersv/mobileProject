@@ -1,27 +1,46 @@
-import 'react-native-gesture-handler';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StatusBar } from 'expo-status-bar';
-import Login from "./src/screens/Login.js";
+import * as ScreenOrientation from "expo-screen-orientation";
+import "react-native-gesture-handler";
+
+import Coleta from "./src/screens/Coleta";
+import Login from "./src/screens/Login";
 import Home from "./src/screens/Home.js";
-import Drawer from './src/screens/Drawer.js';
 import NovaPesquisa from './src/screens/NovaPesquisa.js';
+import Drawer from "./src/screens/Drawer.js";
+import AcoesPesquisas from "./src/screens/AcoesPesquisas.js";
+import Agradecimentos from "./src/screens/Agradecimentos";
+import NovaConta from "./src/screens/NovaConta.js";
+import ModificarPesquisa from './src/screens/ModificarPesquisa';
+import Relatorio from './src/screens/Relatorio';
+import RecuperarSenha from './src/screens/RecuperarSenha';
 
 const Stack = createStackNavigator();
 
 const App = () => {
-  return (
 
+  ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+
+  return (
     <NavigationContainer>
-      <StatusBar hidden={true} />
-      <Stack.Navigator initialRouteName="Drawer" screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Drawer" component={Drawer} />
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Nova Pesquisa" component={NovaPesquisa} />
+      <Stack.Navigator initialRouteName="Login" 
+      screenOptions={{ headerStyle: {backgroundColor: '#2B1D62', height: 80}, 
+      headerTintColor: '#573fba', 
+      headerTitleStyle: {color: '#FFFFFF', fontSize: 30, fontFamily: 'AveriaLibre'} }}>
+
+        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Stack.Screen name="Drawer" component={Drawer} options={{ headerShown: false }} />
+        <Stack.Screen name="Carnaval" component={AcoesPesquisas} options={{ headerShown: true }} />
+        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+        <Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false }} />
+        <Stack.Screen name="Agradecimentos" component={Agradecimentos} options={{ headerShown: false }} />
+        <Stack.Screen name="NovaConta" component={NovaConta} options={{ headerShown: true }} />
+        <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
+        <Stack.Screen name="Relatório" component={Relatorio} options={{ headerShown: true }}/>
+        <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ headerShown: true }}/>
+        <Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>
       </Stack.Navigator>
     </NavigationContainer>
-
   );
 };
 
