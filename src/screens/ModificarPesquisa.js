@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import LabelTextInput from '../components/LabelTextInput.js'
 import LabelTextInput_Icon from '../components/LabelTextInput_Icon.js'
 import Button from '../components/Button.js';
+import ImageInput from '../components/ImageInput.js';
 import PopUp from '../components/PopUp.js';
 
 const ModificarPesquisa = () => {
@@ -41,8 +42,7 @@ const ModificarPesquisa = () => {
                 <LabelTextInput style={styles.label} label="Nome" placeHolder="Carnaval 2024"/>
                 <LabelTextInput_Icon style={styles.label} label="Data" placeHolder="16/02/2024" inputType="DATA"/>
 
-                <Text style={styles.label}>Imagem</Text>
-                <Image style={{width:250, height:75, marginBottom:30}} label='Imagem' source={require('../../assets/images/Imagem_projeto.png')}/>
+                <ImageInput/>
                 
                 <Button txtButton="Salvar" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={SalvarModificacao}/>
             </View>

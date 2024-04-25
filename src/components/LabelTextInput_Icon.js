@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text, TextInput, Alert } from 'react-native';
+import { View, StyleSheet, Text, TextInput } from 'react-native';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 const LabelTextInput_Icon = (props) => {
@@ -49,9 +49,11 @@ const styles = StyleSheet.create({
         color: "#FFFFFF"
     },
     input: {
+        flex: 1,
         fontSize: 18,
         fontFamily: "AveriaLibre",
         color: "#3F92C5",
+
     },
     txtInputContainer: {
         marginTop: 10,
