@@ -3,6 +3,8 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
 import * as ScreenOrientation from 'expo-screen-orientation';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth_mod } from '../config/firebase';
 import LabelTextInput from '../components/LabelTextInput';
 import TextWarn from '../components/TextWarn';
 import Button from '../components/Button';
@@ -20,31 +22,20 @@ const RecuperarSenha = (props) => {
   }
 
   const [txtEmail, setEmail] = useState('')
-  const [txtWarn, setWarn] = useState('')
-  const [isEmailValid, setisEmailValid] = useState(false);
+  const [txtWarn, setWarn] = useState(false)
 
-  const handleLogin = () => {
-    let email = txtEmail
-
-    //Validação do email
-    const validateEmail = (email) => {
-      const regex = /\S+@\S+\.\S+/
-      const emailIsValid = regex.test(email)
-      setisEmailValid(emailIsValid)
-      return emailIsValid
-    }
-
-    //O email também é verificado, assim como na tela de login
-    if(validateEmail(email) == true){
-      console.log('email recupera senha enviado')
-      console.log("Direcionado para a tela Login")
-      props.navigation.navigate('Login')
-    }
-    else{
-      console.log("E-mail inválidos")
-      setWarn('E-mail parece ser inválido')
-    }
-    console.log("\nEmail = " + email )
+  const recuperar = () => {
+    sendPasswordResetEmail(auth_mod, txtEmail)
+      .then(() => {
+        console.log("E-mail de redefinição enviado com sucesso.");
+        console.log("Direcionado para a tela Login")
+        props.navigation.navigate('Login')
+      })
+      .catch((error) => {
+        console.log("Falha ao enviar e-mail de redefinição." + JSON.stringify(error));
+        console.log("\nEmail = " + txtEmail )
+        setWarn(true)
+      })
   }
 
   return (
@@ -58,7 +49,7 @@ const RecuperarSenha = (props) => {
       </View>
 
       <View style={styles.cButton}>
-        <Button txtButton="RECUPERAR" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={handleLogin}/>
+        <Button txtButton="RECUPERAR" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={recuperar}/>
       </View>
   
       <StatusBar style="auto" />
