@@ -3,7 +3,8 @@ import { View, StyleSheet, Text } from "react-native";
 import { useState } from "react";
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/MaterialIcons";
-
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth_mod } from '../config/firebase';
 import Button from "../components/Button.js";
 import LabelTextInput from "../components/LabelTextInput.js";
 import TextWarn from "../components/TextWarn.js";
@@ -12,7 +13,7 @@ const Login = (props) => {
 
   const [txtEmail, setTxtEmail] = useState("");
   const [txtSenha, setTxtSenha] = useState("");
-  const [isLoginValid, setIsLoginValid] = useState(true);
+  const [showWarn, setShowWarn] = useState(false);
 
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
@@ -23,27 +24,23 @@ const Login = (props) => {
   }
 
   //Funcoes do codigo
-  const handleLogin = () => {
+  const autenticar = () => {
     let email = txtEmail;
     let senha = txtSenha;
 
-    //VALIDA O EMAIL
-    const validateEmail = (email) => {
-      const regex = /\S+@\S+\.\S+/;
-      const emailIsValid = regex.test(email);
-      setIsLoginValid(emailIsValid);
-      return emailIsValid;
-    };
+    signInWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
+      .then((userLogged) => {
+        console.log("Usuário autenticado com sucesso: " + JSON.stringify(userLogged));
+        console.log("\nEmail = " + email + "\nSenha = " + senha);
+        console.log("Direcionado para a tela HOME");
+        props.navigation.navigate("Drawer");
+      })
+      .catch((error) => {
+        console.log("Erro ao autenticar usuário: " + JSON.stringify(error));
+        console.log("\nEmail = " + email + "\nSenha = " + senha);
+        setShowWarn(true); // Exibe o TextWarn em caso de erro
+      })
 
-    //IMPLEMENTAR LOGICA DE LOGIN COMPARANDO EMAIL E SENHA NO FUTURO
-    //POR ENQUANTO SE FOR UM EMAIL VALIDO JA CONSEGUE ACESSO A PAGINA HOME
-    if (validateEmail(email)) {
-      console.log("Direcionado para a tela HOME");
-      props.navigation.navigate("Drawer");
-    } else {
-      console.log("E-mail e/ou senha inválidos.");
-    }
-    console.log("\nEmail = " + email + "\nSenha = " + senha);
   };
 
   const toScreenForgetPsw = () => {
@@ -87,14 +84,14 @@ const Login = (props) => {
 
         <TextWarn
           txt="E-mail e/ou senha inválidos."
-          isVisible={!isLoginValid}
+          isVisible={showWarn} // Controla a visibilidade com a prop isVisible
         />
 
         <Button
           txtButton="Entrar"
           buttonColor="#37BD6D"
           txtColor="#FFFFFF"
-          functionButton={handleLogin}
+          functionButton={autenticar}
         />
       </View>
 
