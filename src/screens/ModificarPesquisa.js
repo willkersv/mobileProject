@@ -44,8 +44,8 @@ const ModificarPesquisa = (props) => {
     }, [selectedSurvey]);
   
     
-    const deletarPesquisa = () => {
-      deleteSurvey(user.uid, selectedSurvey.id);
+    const deletarPesquisa = async () => {
+      await deleteSurvey(user.uid, selectedSurvey.id);
       props.navigation.pop(2);
     };
   
