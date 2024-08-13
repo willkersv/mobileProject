@@ -1,7 +1,8 @@
 import { View, StyleSheet, Text } from "react-native";
 import { useFonts } from "expo-font";
+import { useEffect } from 'react'
 
-const Agradecimentos = () => {
+const Agradecimentos = (props) => {
 
   const [fontsLoaded] = useFonts({
     AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
@@ -10,6 +11,12 @@ const Agradecimentos = () => {
   if (!fontsLoaded) {
     return null;
   }
+
+  useEffect(() => {
+    setTimeout(() => {
+        props.navigation.pop()
+    }, 3000)
+  }, [])
 
   //Codigo
   return (

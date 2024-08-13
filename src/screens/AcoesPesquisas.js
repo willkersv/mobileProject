@@ -1,8 +1,24 @@
 import { View, StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
 import CardActions from "../components/CardActions.js";
+import {useSurvey} from '../contexts/SurveyContext';
+import {useRoute, useNavigation} from '@react-navigation/native';
+import {useLayoutEffect} from 'react';
 
 const AcoesPesquisas = (props) => {
+
+  const {selectedSurvey} = useSurvey();
+
+  const route = useRoute();
+  const navigation = useNavigation();
+  const {title} = route.params || {}; // Acessar o parâmetro passado
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: title || 'Modificar Pesquisa', // Define um título padrão caso o parâmetro não seja fornecido
+    });
+  }, [navigation, title]);
+
  
   //Fonte
   const [fontsLoaded] = useFonts({

@@ -14,7 +14,7 @@ import {useAuth} from '../contexts/AuthContext.js';
 import {deleteSurvey, updateSurvey} from '../config/functionPesquisa.js';
 
 
-const ModificarPesquisa = () => {
+const ModificarPesquisa = (props) => {
     
   //referente ao modal de exclusao=================
     const [modalVisible, setModalVisible] = useState(false);
@@ -61,7 +61,7 @@ const ModificarPesquisa = () => {
           await updateSurvey(user.uid, selectedSurvey.id, txtNomePesquisa, txtDataPesquisa, null);
         }
         // Navegar de volta após a atualização
-        navigation.goBack();
+        props.navigation.pop(2);
       } catch (error) {
         console.error('Erro ao salvar modificações:', error);
       }
@@ -80,11 +80,11 @@ const ModificarPesquisa = () => {
     return (
         <View style={styles.container}>
             <View style = {styles.cInput}>
-                <LabelTextInput style={styles.label} label="Nome" placeHolder={txtNomePesquisa}/>
-                <LabelTextInput_Icon style={styles.label} label="Data" placeHolder={txtDataPesquisa} inputType="DATA"/>
+                <LabelTextInput style={styles.label} label="Nome" placeHolder={txtNomePesquisa} inputValue={txtNomePesquisa} onChangeText={setTxtNomePesquisa}/>
+                <LabelTextInput_Icon style={styles.label} label="Data" placeHolder={txtDataPesquisa} inputType="DATA" inputValue={txtDataPesquisa} onChangeText={setTxtDataPesquisa}/>
 
                 {image ? (
-                  <ImageInput setImageCallback={setImagem} initialValue={image} />
+                  <ImageInput setImageCallback={setImage} initialValue={image} />
                 ) : (
                   <Text style={styles.label}>Nenhuma imagem disponível</Text>
                 )}

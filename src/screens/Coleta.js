@@ -67,7 +67,7 @@ const Coleta = (props) => {
     try {
       // Chame a função para adicionar a nota ao banco de dados
       await addRating(userId, surveyId, ratingType);
-      navigation.navigate('AgradecimentoParticipacao');
+      props.navigation.navigate('Agradecimentos');
     } catch (error) {
       console.error('Erro ao adicionar nota:', error);
     }
@@ -75,7 +75,7 @@ const Coleta = (props) => {
 
   const gotoBackstage = () => {
     // Navega para a tela de configuração da pesquisa
-    navigation.pop();
+    props.navigation.pop(1);
   };
 
 
@@ -150,7 +150,7 @@ const styles = StyleSheet.create({
   invisibleButton: {
     padding: 20,
     alignSelf: 'flex-end',
-    backgroundColor: 'red',
+    
   },
   button: {
     justifyContent: 'center',

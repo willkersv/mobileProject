@@ -45,15 +45,15 @@ const NovaPesquisa = (props) => {
         }
     };
     //++++++++++++valida se os campos estão vazios e não deixa seguir pra HOME++++++++++++
-    const goToHome = () => {
+    const goToHome = async () => {
         if (txtNomePesquisa.trim() != '' || txtDataPesquisa.trim() != '') {
             validarNomePesquisa()
             validarDataPesquisa()
-            createSurvey(user.uid, txtNomePesquisa, txtDataPesquisa, image)
-            props.navigation.navigate('Drawer');
+            await createSurvey(user.uid, txtNomePesquisa, txtDataPesquisa, image)
+            props.navigation.pop(1);
         } else {
             console.log("Direcionado para HOME");
-            props.navigation.navigate('Drawer');
+            props.navigation.pop(1);
         }
 
     };

@@ -19,7 +19,7 @@ const LabelTextInput_Icon = (props) => {
         keyboardType = 'email-address'
     }
     if (inputType === 'DATA'){
-        keyboardType = 'numeric'
+        keyboardType = 'default'
     }
 
     return (

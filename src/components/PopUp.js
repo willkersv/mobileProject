@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Modal} from 'react-native';
-import Button from '../components/Button.js';
+import Button from './Button';
 
 const PopUp = ({modalVisible, closeModal, modalAction}) => {
   const deleteResearch = () => {
@@ -22,18 +22,12 @@ const PopUp = ({modalVisible, closeModal, modalAction}) => {
               Tem certeza de apagar essa pesquisa?
             </Text>
             <View style={styles.container}>
-              <Button
-                text="SIM"
-                textColor="white"
-                backgroundColor="#FF8383"
-                onPress={deleteResearch}
-              />
-              <Button
-                text="NÃO"
-                textColor="white"
-                backgroundColor="#3f92c5"
-                onPress={closeModal}
-              />
+                  <View style={styles.buttonSim}>
+                    <Button txtButton="SIM" buttonColor="#FF8383" txtColor="#FFFFFF" buttonHeight={71} functionButton={deleteResearch}/>
+                  </View>
+                  <View style={styles.buttonCancelar}>
+                    <Button txtButton="CANCELAR" buttonColor="#3F92C5" txtColor="#FFFFFF" buttonHeight={71} functionButton={closeModal}/>  
+                  </View>
             </View>
           </View>
         </View>

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { useFonts } from 'expo-font';
 
@@ -46,9 +47,10 @@ const Home = (props) => {
         props.navigation.navigate('Carnaval', {title: surveyObj.name});
       };
     
-      /*const fetchData = async () => {
+      const fetchData = async () => {
         try {
           surveys = await getSurveys(user.uid);
+          console.log(surveys)
           setUserServeys(surveys);
         } catch (e) {
           console.log(e);
@@ -58,7 +60,7 @@ const Home = (props) => {
         React.useCallback(() => {
           fetchData();
         }, []),
-      );*/
+      );
 
     return(
         <View style={styles.container}>
@@ -69,7 +71,7 @@ const Home = (props) => {
                 <ScrollView horizontal style={styles.cCards}>
                 {userServeys?.map(
                     survey => (
-                    <CardPesquisa
+                    <CardResearch
                         key={survey.id}
                         title={survey.name}
                         img={survey.imageUrl}
@@ -77,7 +79,6 @@ const Home = (props) => {
                         onPress={() => handleCardPress(survey)}
                     />
                     ),
-                    // console.log(survey),
                 )}
                     {/* <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023" onPress={() => handleNavigate('Carnaval')}/>
                     <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022"  onPress={() => handleNavigate('Carnaval')}/>
@@ -114,7 +115,7 @@ const styles = StyleSheet.create({
     },
     cCards:{
         flexDirection: "row",
-        height:150,
+        height:170,
         marginVertical:18,
     },
     button:{

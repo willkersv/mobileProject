@@ -3,6 +3,7 @@ import {
     collection,
     addDoc,
     getDocs,
+    getDoc,
     doc,
     updateDoc,
     deleteDoc,
@@ -23,7 +24,7 @@ import {
 
     if (surveyExists) {
       console.log('Uma pesquisa com esse nome já existe.');
-      return null; // Ou você pode retornar uma mensagem personalizada
+      return null; 
     }
 
     // Abrir o blob da imagem
@@ -46,11 +47,11 @@ import {
       date,
       imageUrl,
       ratings: {
-        terrible: 0,
-        bad: 0,
-        neutral: 0,
-        good: 0,
-        excellent: 0,
+        pessimo: 0,
+        ruim: 0,
+        neutro: 0,
+        bom: 0,
+        excelente: 0,
       },
     });
 
@@ -114,6 +115,8 @@ export async function getSurveys(userId) {
         date: date,
         imageUrl: imageUrl,
       });
+
+      console.log(name)
   
       console.log('Pesquisa atualizada com ID:', surveyId);
     } catch (error) {
@@ -137,7 +140,7 @@ export async function getSurveys(userId) {
   
   export async function addRating(userId, surveyId, ratingType) {
     try {
-      const validRatings = ['terrible', 'bad', 'neutral', 'good', 'excellent'];
+      const validRatings = ['pessimo', 'ruim', 'neutro', 'bom', 'excelente'];
       if (!validRatings.includes(ratingType)) {
         throw new Error('Tipo de nota inválido');
       }
@@ -149,7 +152,7 @@ export async function getSurveys(userId) {
   
       console.log('dados pesquisa', surveyId);
       console.log(
-        `Nota ${ratingType} atualizada com sucesso na pesquisa com ID: ${surveyId}`,
+        `Nota ${ratingType} dada a pesquisa com ID: ${surveyId}`,
       );
     } catch (error) {
       console.error('Erro ao atualizar nota:', error);
