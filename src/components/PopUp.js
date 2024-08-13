@@ -1,35 +1,46 @@
-import {View, Text, StyleSheet, Modal} from "react-native";
+import {View, Text, StyleSheet, Modal} from 'react-native';
 import Button from '../components/Button.js';
 
-const PopUp = ({modalVisible, closeModal}) => {
-
+const PopUp = ({modalVisible, closeModal, modalAction}) => {
   const deleteResearch = () => {
-    console.log("PESQUISA APAGADA!")
-  }
+    modalAction();
+    closeModal();
+  };
 
-  return(
-        <View style={styles.centralized}>
-          <Modal animationType="fade" transparent={true}
-            visible={modalVisible}onRequestClose={() => {
-              closeModal();
-            }}>
-            <View style={styles.modalBackground}>
-              <View style={styles.modal}>
-                <Text style={styles.modalText}>Tem certeza de apagar essa pesquisa?</Text>
-                <View style={styles.container}>
-                  <View style={styles.buttonSim}>
-                    <Button txtButton="SIM" buttonColor="#FF8383" txtColor="#FFFFFF" buttonHeight={71} functionButton={deleteResearch}/>
-                  </View>
-                  <View style={styles.buttonCancelar}>
-                    <Button txtButton="CANCELAR" buttonColor="#3F92C5" txtColor="#FFFFFF" buttonHeight={71} functionButton={closeModal}/>  
-                  </View>
-                </View>
-              </View>
+  return (
+    <View style={styles.centralized}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          closeModal();
+        }}>
+        <View style={styles.modalBackground}>
+          <View style={styles.modal}>
+            <Text style={styles.modalText}>
+              Tem certeza de apagar essa pesquisa?
+            </Text>
+            <View style={styles.container}>
+              <Button
+                text="SIM"
+                textColor="white"
+                backgroundColor="#FF8383"
+                onPress={deleteResearch}
+              />
+              <Button
+                text="NÃO"
+                textColor="white"
+                backgroundColor="#3f92c5"
+                onPress={closeModal}
+              />
             </View>
-          </Modal>
-      </View>
-    )
-}
+          </View>
+        </View>
+      </Modal>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   centralized: {
@@ -37,35 +48,35 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  modalBackground:{
+  modalBackground: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   modal: {
     width: 480,
     height: 200,
     backgroundColor: '#2B1F5C',
     alignItems: 'center',
-    justifyContent:'center',
+    justifyContent: 'center',
     padding: 25,
     elevation: 5,
   },
   container: {
     justifyContent: 'space-between',
     flexDirection: 'row',
+    gap: 15,
   },
-  buttonSim:{
+  buttonSim: {
     paddingRight: 20,
-    width: 201
+    width: 201,
   },
-  buttonCancelar:{
-    width: 201
+  buttonCancelar: {
+    width: 201,
   },
   modalText: {
     color: 'white',
-    fontFamily: "AveriaLibre", 
     fontSize: 26,
     marginBottom: 14,
     textAlign: 'center',

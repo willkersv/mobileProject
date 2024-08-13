@@ -8,11 +8,17 @@ import Button from '../components/Button';
 import LabelTextInput_Icon from '../components/LabelTextInput_Icon';
 import ImageInput from '../components/ImageInput.js';
 
+import { useAuth } from '../contexts/AuthContext.js';
+import { createSurvey } from '../config/functionPesquisa.js';
+
 const NovaPesquisa = (props) => {
     const [txtNomePesquisa, setTxtNomePesquisa] = useState('');
     const [txtDataPesquisa, setTxtDataPesquisa] = useState('');
+    const [image, setImage] = useState();
     const [txtValidaNome, setNomePesquisaError] = useState(false);
     const [txtValidaData, setDataPesquisaError] = useState(false);
+
+    const user = useAuth().user
 
     const [fontsLoaded] = useFonts({
         'AveriaLibre': require('../../assets/fonts/AveriaLibre-Regular.ttf'),
@@ -40,9 +46,11 @@ const NovaPesquisa = (props) => {
     };
     //++++++++++++valida se os campos estão vazios e não deixa seguir pra HOME++++++++++++
     const goToHome = () => {
-        if (txtNomePesquisa.trim() === '' || txtDataPesquisa.trim() === '') {
+        if (txtNomePesquisa.trim() != '' || txtDataPesquisa.trim() != '') {
             validarNomePesquisa()
             validarDataPesquisa()
+            createSurvey(user.uid, txtNomePesquisa, txtDataPesquisa, image)
+            props.navigation.navigate('Drawer');
         } else {
             console.log("Direcionado para HOME");
             props.navigation.navigate('Drawer');
@@ -58,7 +66,7 @@ const NovaPesquisa = (props) => {
             <LabelTextInput_Icon label="Data" inputValue={txtDataPesquisa} inputType='DATA' onChangeText={(txtDataPesquisa) => setTxtDataPesquisa(txtDataPesquisa)}/>
             <TextWarn marginBottom="0" txt="Preencha a data" isVisible={txtValidaData} />
 
-            <ImageInput ctx="txt" />
+            <ImageInput setImageCallback={setImage} />
                 
             <Button txtButton="Cadastrar" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={goToHome} />
 

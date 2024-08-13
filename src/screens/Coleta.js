@@ -4,9 +4,23 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import {useState, useEffect} from 'react';
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import Agradecimentos from "./Agradecimentos";
+
+import {addRating} from '../config/functionPesquisa';
+import {getAuth} from 'firebase/auth';
+import {useSurvey} from '../contexts/SurveyContext';
+
+const AvaliacaoButton = props => {
+  return (
+    <TouchableOpacity style={styles.button} onPress={props.onPress}>
+      <Icon name={props.icon} color={props.color} size={50} />
+      <Text style={styles.buttonText}>{props.text}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const Coleta = (props) => {
 
@@ -18,89 +32,135 @@ const Coleta = (props) => {
     return null;
   }
 
-  let setNota = 0;
+  const [feedbackLevel, setFeedbackLevel] = useState(0);
+  const {selectedSurvey} = useSurvey();
 
-  const teste = (numero) => {
-    if (numero == 1) {
-      setNota = 1;
-    } else if (numero == 2) {
-      setNota = 2;
-    } else if (numero == 3) {
-      setNota = 3;
-    } else if (numero == 4) {
-      setNota = 4;
-    } else if (numero == 5) {
-      setNota = 5;
+  const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      if (user) {
+        setUserId(user.uid);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  const surveyId = selectedSurvey?.id; // Supondo que selectedSurvey é um objeto que contém um campo 'id'
+  console.log('Dados da pesquisa', selectedSurvey);
+
+  const collectFeedback = async level => {
+    if (!userId || !surveyId) {
+      console.error('Usuário ou ID da pesquisa não definidos');
+      return;
     }
-    console.log("Nota é "+ setNota);
-    // props.navigation.goBack();
-    props.navigation.navigate(Agradecimentos)
-    setTimeout(()=> props.navigation.navigate('Drawer'), 3000)
-  
+
+    setFeedbackLevel(level);
+
+    // Mapeia o nível de feedback para o tipo de nota
+    const ratingTypes = ['pessimo', 'ruim', 'neutro', 'bom', 'excelente'];
+    const ratingType = ratingTypes[level];
+
+    try {
+      // Chame a função para adicionar a nota ao banco de dados
+      await addRating(userId, surveyId, ratingType);
+      navigation.navigate('AgradecimentoParticipacao');
+    } catch (error) {
+      console.error('Erro ao adicionar nota:', error);
+    }
   };
 
-  //Codigo
+  const gotoBackstage = () => {
+    // Navega para a tela de configuração da pesquisa
+    navigation.pop();
+  };
+
+
   return (
     <View style={styles.container}>
-      <Text style={styles.titulo}>O que você achou do Carnaval 2024?</Text>
-      <View style={styles.cIcones}>
-        <TouchableOpacity onPress={() => teste(1)} style={styles.icone}>
-          <Icon name="sentiment-very-dissatisfied" size={90} color="#D71616" />
-          <Text style={styles.texto}>Péssimo</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => teste(2)} style={styles.icone}>
-          <Icon name="sentiment-dissatisfied" size={90} color="#FF360A" />
-          <Text style={styles.texto}>Ruim</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => teste(3)} style={styles.icone}>
-          <Icon name="sentiment-neutral" size={90} color="#FFC632" />
-          <Text style={styles.texto}>Neutro</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => teste(4)} style={styles.icone}>
-          <Icon name="sentiment-satisfied" size={90} color="#37BD6D" />
-          <Text style={styles.texto}>Bom</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => teste(5)} style={styles.icone}>
-          <Icon name="sentiment-very-satisfied" size={90} color="#25BC22" />
-          <Text style={styles.texto}>Excelente</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        style={styles.invisibleButton}
+        onPress={gotoBackstage}></TouchableOpacity>
+      <View style={styles.textContainer}>
+        <Text style={styles.text}>
+          {`O que você achou do ${selectedSurvey.name}`}
+        </Text>
+      </View>
+      <View style={styles.buttonContainer}>
+        <AvaliacaoButton
+          text="Péssimo"
+          icon="face-frown"
+          color="#d71616"
+          onPress={() => collectFeedback(0)}
+        />
+        <AvaliacaoButton
+          text="Ruim"
+          icon="face-frown-open"
+          color="#ff360a"
+          onPress={() => collectFeedback(1)}
+        />
+        <AvaliacaoButton
+          text="Neutro"
+          icon="face-meh"
+          color="#ffc631"
+          onPress={() => collectFeedback(2)}
+        />
+        <AvaliacaoButton
+          text="Bom"
+          icon="face-grin-wide"
+          color="#37bd6d"
+          onPress={() => collectFeedback(3)}
+        />
+        <AvaliacaoButton
+          text="Excelente"
+          icon="face-grin-stars"
+          color="#25bc22"
+          onPress={() => collectFeedback(4)}
+        />
       </View>
     </View>
   );
 };
 
-//Estilo do codigo
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: '#372775',
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "#372775",
-    paddingHorizontal: "5%",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  titulo: {
-    flex: 0.4,
-    color: "#FFFFFF",
-    fontFamily: "AveriaLibre",
-    justifyContent: "center",
-    alignItems: "center",
-    textAlign: "center",
+  buttonContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    flex: 8,
+  },
+  textContainer: {
+    flex: 2,
+    justifyContent: 'flex-end',
+  },
+  text: {
+    color: 'white',
     fontSize: 30,
+    fontFamily: 'AveriaLibre-Regular',
   },
-  texto: {
-    color: "#FFFFFF",
-    fontFamily: "AveriaLibre",
-    fontSize: 22,
-    marginTop: 10,
+  invisibleButton: {
+    padding: 20,
+    alignSelf: 'flex-end',
+    backgroundColor: 'red',
   },
-  cIcones: {
-    flexDirection: "row",
-    justifyContent: "space-between",
+  button: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 5,
   },
-  icone: {
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+  buttonText: {
+    fontSize: 20,
+    color: 'white',
+    fontFamily: 'AveriaLibre-Regular',
   },
 });
 

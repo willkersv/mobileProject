@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useFonts } from "expo-font";
 import Icon from "react-native-vector-icons/MaterialIcons";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth_mod } from '../config/firebase';
+import { auth_mod, db } from '../config/firebase';
 import Button from "../components/Button.js";
 import LabelTextInput from "../components/LabelTextInput.js";
 import TextWarn from "../components/TextWarn.js";
+import { setDoc, doc } from "firebase/firestore";
 
 const Login = (props) => {
 
@@ -24,16 +25,24 @@ const Login = (props) => {
   }
 
   //Funcoes do codigo
-  const autenticar = () => {
+  const autenticar = async() => {
     let email = txtEmail;
     let senha = txtSenha;
 
     signInWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
       .then((userLogged) => {
+        console.log(userLogged)
+        const user = userLogged.user
+        // Adicionar o usuário à coleção `users`
+        setDoc(doc(db, 'users', user.uid), {
+          email,
+          createdAt: new Date(),
+        });
         console.log("Usuário autenticado com sucesso: " + JSON.stringify(userLogged));
         console.log("\nEmail = " + email + "\nSenha = " + senha);
         console.log("Direcionado para a tela HOME");
         props.navigation.navigate("Drawer");
+
       })
       .catch((error) => {
         console.log("Erro ao autenticar usuário: " + JSON.stringify(error));
@@ -41,7 +50,10 @@ const Login = (props) => {
         setShowWarn(true); // Exibe o TextWarn em caso de erro
       })
 
+    
+
   };
+
 
   const toScreenForgetPsw = () => {
     console.log("Direcionado para a tela ESQUECEU SENHA")
