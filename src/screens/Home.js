@@ -7,31 +7,31 @@ import SearchInput from '../components/SearchInput.js';
 import CardResearch from '../components/CardResearch.js';
 import Button from '../components/Button.js';
 
-import {getSurveys} from '../config/functionPesquisa.js';
+import { getSurveys } from '../config/functionPesquisa.js';
 
-import {useAuth} from '../contexts/AuthContext.js';
-import {useSurvey} from '../contexts/SurveyContext.js';
-import {useFocusEffect} from '@react-navigation/native';
+import { useAuth } from '../contexts/AuthContext.js';
+import { useSurvey } from '../contexts/SurveyContext.js';
+import { useFocusEffect } from '@react-navigation/native';
 
 const Home = (props) => {
 
-    //Variáveis
-    const [txtSearch, setTxtSearch] = useState('')
-    const [userServeys, setUserServeys] = useState();
+    // Variáveis
+    const [txtSearch, setTxtSearch] = useState('');
+    const [userSurveys, setUserSurveys] = useState([]);
     const user = useAuth().user;
-    const {setSelectedSurvey} = useSurvey();
+    const { setSelectedSurvey } = useSurvey();
 
-    //Fonte
+    // Fonte
     const [fontsLoaded] = useFonts({
         'AveriaLibre': require('../../assets/fonts/AveriaLibre-Regular.ttf'),
     });
-    if(!fontsLoaded) {
-        return null
+    if (!fontsLoaded) {
+        return null;
     }
 
-    //Funcoes
+    // Funções
     const handleNavigate = (page) => {
-        switch(page) {
+        switch (page) {
             case 'Carnaval':
                 props.navigation.navigate('Carnaval');
                 break;
@@ -44,52 +44,60 @@ const Home = (props) => {
 
     const handleCardPress = surveyObj => {
         setSelectedSurvey(surveyObj);
-        props.navigation.navigate('Carnaval', {title: surveyObj.name});
-      };
-    
-      const fetchData = async () => {
-        try {
-          surveys = await getSurveys(user.uid);
-          console.log(surveys)
-          setUserServeys(surveys);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      useFocusEffect(
-        React.useCallback(() => {
-          fetchData();
-        }, []),
-      );
+        props.navigation.navigate('Carnaval', { title: surveyObj.name });
+    };
 
-      
-    return(
+    const fetchData = async () => {
+        try {
+            const surveys = await getSurveys(user.uid);
+            setUserSurveys(surveys);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+
+    useFocusEffect(
+        React.useCallback(() => {
+            fetchData();
+        }, []),
+    );
+
+    // Filtra as pesquisas com base no termo digitado no campo de busca
+    const filteredSurveys = userSurveys.filter(survey => 
+        survey.name.toLowerCase().includes(txtSearch.toLowerCase())
+    );
+
+    return (
         <View style={styles.container}>
 
             <View style={styles.cContent}>
-                <SearchInput placeholder="Insira o termo de busca..." value={txtSearch} onChangeText={setTxtSearch} />
+                <SearchInput 
+                    placeholder="Insira o termo de busca..." 
+                    value={txtSearch} 
+                    onChangeText={setTxtSearch} 
+                />
                 
                 <ScrollView horizontal style={styles.cCards}>
-                {userServeys?.map(
-                    survey => (
-                    <CardResearch
-                        key={survey.id}
-                        title={survey.name}
-                        img={survey.imageUrl}
-                        date={survey.date}
-                        onPress={() => handleCardPress(survey)}
-                    />
-                    ),
-                )}
-                    {/* <CardResearch img={require('../../assets/images/compCell.png')} title="SECOMP 2023" date="10/10/2023" onPress={() => handleNavigate('Carnaval')}/>
-                    <CardResearch img={require('../../assets/images/people.png')} title="UBUNTU 2022" date="05/06/2022"  onPress={() => handleNavigate('Carnaval')}/>
-                    <CardResearch img={require('../../assets/images/girl.png')} title="MENINAS CPU" date="01/04/2022" onPress={() => handleNavigate('Carnaval')}/>
-                    <CardResearch img={require('../../assets/images/dontKnow.png')} title="PESQUISA" date="32/13/2024" onPress={() => handleNavigate('Carnaval')}/>
-                    */}
-                    </ScrollView>
+                    {filteredSurveys.map(
+                        survey => (
+                            <CardResearch
+                                key={survey.id}
+                                title={survey.name}
+                                img={survey.imageUrl}
+                                date={survey.date}
+                                onPress={() => handleCardPress(survey)}
+                            />
+                        ),
+                    )}
+                </ScrollView>
 
                 <View style={styles.button}>
-                    <Button txtButton="NOVA PESQUISA" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={() => handleNavigate('NovaPesquisa')} />
+                    <Button 
+                        txtButton="NOVA PESQUISA" 
+                        buttonColor="#37BD6D" 
+                        txtColor="#FFFFFF" 
+                        functionButton={() => handleNavigate('NovaPesquisa')} 
+                    />
                 </View>
             </View>
         </View>
@@ -97,31 +105,23 @@ const Home = (props) => {
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         flexDirection: "column",
         backgroundColor: '#372775',
     },
-    cTop:{
-        backgroundColor: "#2B1D62",
-        width: "100%",
-        height: "20%",
-        paddingTop: 10,
-        paddingLeft: 10,
-        flexDirection:"row"
-    },
-    cContent:{
+    cContent: {
         marginVertical: 15,
         paddingHorizontal: "3%"
     },
-    cCards:{
+    cCards: {
         flexDirection: "row",
-        height:170,
-        marginVertical:18,
+        height: 170,
+        marginVertical: 18,
     },
-    button:{
+    button: {
         marginVertical: 10
     }
 })
 
-export default Home
+export default Home;

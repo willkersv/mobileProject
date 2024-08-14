@@ -16,7 +16,7 @@ import {useSurvey} from '../contexts/SurveyContext';
 const AvaliacaoButton = props => {
   return (
     <TouchableOpacity style={styles.button} onPress={props.onPress}>
-      <Icon name={props.icon} color={props.color} size={50} />
+      <Icon name={props.icon} size={50} color={props.color}/>
       <Text style={styles.buttonText}>{props.text}</Text>
     </TouchableOpacity>
   );
