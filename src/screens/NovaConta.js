@@ -1,7 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
 import { useFonts } from 'expo-font';
-
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth_mod } from '../config/firebase';
 import LabelTextInput from '../components/LabelTextInput';
 import TextWarn from '../components/TextWarn';
 import Button from '../components/Button';
@@ -15,63 +16,56 @@ const NovaConta = (props) => {
   if(!fontsLoaded) {
     return null
   }
-
+  
   const [txtEmail, setEmail] = useState('')
   const [txtSenha, setSenha] = useState('')
   const [txtRepSenha, setRepSenha] = useState('')
-  const [isEmailValid, setIsEmailValid] = useState(true);
-  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
 
-
-  const handleLogin = () => {
+  const cadastrarUsuario = () => {
     let email = txtEmail
     let senha = txtSenha
     let repSenha = txtRepSenha
 
-    //Validação do email
-    const validateEmail = (email) => {
-      const regex = /\S+@\S+\.\S+/
-      const emailIsValid = regex.test(email)
-
-      setIsEmailValid(emailIsValid)
-      return emailIsValid
+    if(senha !== repSenha) {
+      setIsPasswordValid(true);
+      return; // Se as senhas não forem iguais, parar a execução
     }
-
-    const validatePassword= (senha, repSenha) => {
-      const PswValid = senha === repSenha;
-      setIsPasswordValid(PswValid)
-      return PswValid
-    }
-
-    //O email também é verificado, assim como na tela de login
-    if(validateEmail(email) && validatePassword(senha, repSenha)){
-
-      console.log('Acesso concedido')
-      console.log("Direcionado para a tela Login")
-      props.navigation.navigate('Login')
-    }
-
-
-    console.log("\nEmail = " + email + "\nSenha = " + senha)
+    
+    createUserWithEmailAndPassword(auth_mod, txtEmail, txtSenha)
+      .then((userCredential) => {
+        console.log("Usuário criado com sucesso: " + JSON.stringify(userCredential));
+        console.log("\nEmail = " + email + "\nSenha = " + senha)
+        console.log('Acesso concedido')
+        console.log("Direcionado para a tela Login")
+        props.navigation.navigate('Login')
+      })
+      .catch((error) => {
+        console.log("Erro ao criar usuário: " + JSON.stringify(error));
+        setIsPasswordValid(true)
+      })
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.cInput}>
-
         <LabelTextInput label='E-mail' placeHolder='jurandir.pereira@hotmail.com' inputValue={txtEmail} inputType='EMAIL' onChangeText={(txtEmail) => setEmail(txtEmail)}/>
         <LabelTextInput label='Senha' placeHolder='*********' inputValue={txtSenha} inputType='PSW' onChangeText={(txtSenha) => setSenha(txtSenha)}/>
         <LabelTextInput label='Repetir Senha' inputValue={txtRepSenha} inputType='PSW' onChangeText={(txtRepSenha) => setRepSenha(txtRepSenha)}/>
       </View>
-
-      <View style={styles.cWarn}>
-
-        {!isEmailValid && <TextWarn txt='E-mail inválido.' isVisible={!isEmailValid}/>} 
-        {!isPasswordValid && <TextWarn txt='O campo repetir senha difere da senha' isVisible={!isPasswordValid}/>} 
-      </View>
-
+      
+      <TextWarn 
+        txt='O campo repetir senha difere da senha' 
+        isVisible={isPasswordValid}
+      />
+      
       <View style={styles.cButtons}>
-        <Button txtButton="CADASTRAR" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={handleLogin}/>
+        <Button 
+          txtButton="CADASTRAR" 
+          buttonColor="#37BD6D" 
+          txtColor="#FFFFFF" 
+          functionButton={cadastrarUsuario}
+        />
       </View>
     </View>
   );
@@ -91,11 +85,6 @@ const styles = StyleSheet.create({
     marginTop: 5,
     alignContent: 'center',
     justifyContent: 'center'
-  },
-
-  cWarn:{
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
   },
   cButtons: {
     marginTop: 20,
