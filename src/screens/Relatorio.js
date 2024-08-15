@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, View, ActivityIndicator, Text } from 'react-native';
-import { PieChart } from 'react-native-svg-charts';
+import { PieChart } from 'react-native-chart-kit';
 import { getAuth } from 'firebase/auth';
 import { getFirestore, doc, getDoc } from 'firebase/firestore';
 import app from '../config/firebase';
@@ -102,12 +102,13 @@ const Relatorio = () => {
     return (
         
         <View style={styles.container}>
-            <PieChart 
-                style={{height: 325, width: 500}}
-                outerRadius={'68%'}
-                innerRadius={10}
+            {/* <PieChart 
+                width={500}
+                height={325}
+                //outerRadius={'68%'}
+                //innerRadius={10}
                 data={data}
-            />
+            /> */}
             <View style={styles.secondContainer}>
                 <ChartInfo squareColor="#F1CE7E" infoTxt="Excelente" />
                 <ChartInfo squareColor="#6994FE" infoTxt="Bom" />
