@@ -44,11 +44,11 @@ const Relatorio = () => {
 
                     if (ratings) {
                         const data = [
-                            { key: 'pessimo', value: ratings.pessimo, svg: { fill: '#53D8D8' }, arc: { outerRadius: '115%', cornerRadius: 10, } },
-                            { key: 'ruim', value: ratings.ruim, svg: { fill: '#EA7288' } },
-                            { key: 'neutro', value: ratings.neutro, svg: { fill: '#5FCDA4' } },
-                            { key: 'bom', value: ratings.bom, svg: { fill: '#6994FE' } },
-                            { key: 'excelente', value: ratings.excelente, svg: { fill: '#F1CE7E' } },
+                            { name: 'pessimo', population: ratings.pessimo, color: '#53D8D8', legendFontColor: "#FFFFFF" },
+                            { name: 'ruim', population: ratings.ruim, color: '#EA7288', legendFontColor: "#FFFFFF" },
+                            { name: 'neutro', population: ratings.neutro, color: '#5FCDA4', legendFontColor: "#FFFFFF" },
+                            { name: 'bom', population: ratings.bom, color: '#6994FE', legendFontColor: "#FFFFFF" },
+                            { name: 'excelente', population: ratings.excelente, color: '#F1CE7E', legendFontColor: "#FFFFFF" },
                         ];
 
                         const totalReactions = ratings.pessimo + ratings.ruim + ratings.neutro + ratings.bom + ratings.excelente;
@@ -100,32 +100,37 @@ const Relatorio = () => {
     }
 
     return (
-        
         <View style={styles.container}>
-            {/* <PieChart 
+            <PieChart 
                 width={500}
                 height={325}
-                //outerRadius={'68%'}
-                //innerRadius={10}
+                backgroundColor={"transparent"}
                 data={data}
-            /> */}
-            <View style={styles.secondContainer}>
-                <ChartInfo squareColor="#F1CE7E" infoTxt="Excelente" />
-                <ChartInfo squareColor="#6994FE" infoTxt="Bom" />
-                <ChartInfo squareColor="#5FCDA4" infoTxt="Neutro" />
-                <ChartInfo squareColor="#EA7288" infoTxt="Ruim" />
-                <ChartInfo squareColor="#53D8D8" infoTxt="Pessimo" />
-            </View>
+                accessor={"population"}
+                paddingLeft = {'8'}
+                chartConfig={{
+                    backgroundGradientFrom: "#1E2923",
+                    backgroundGradientFromOpacity: 0,
+                    backgroundGradientTo: "#08130D",
+                    backgroundGradientToOpacity: 0.5,
+                    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+                    strokeWidth: 2, 
+                    barPercentage: 0.5,
+                    useShadowColorFromDataset: false 
+                }}
+            />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
+        display: 'flex',
         flex: 1,
         backgroundColor: '#372775',
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center'
     },
     loadingContainer: {
         flex: 1,

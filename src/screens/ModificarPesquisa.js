@@ -20,7 +20,7 @@ const ModificarPesquisa = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [txtNomePesquisa, setTxtNomePesquisa] = useState('');
     const [txtDataPesquisa, setTxtDataPesquisa] = useState('');
-    const [image, setImage] = useState();
+    const [image, setImage] = useState(null);
 
     const user = useAuth().user
     const {selectedSurvey} = useSurvey();

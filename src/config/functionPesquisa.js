@@ -10,7 +10,7 @@ import {
     query,
     increment,
   } from 'firebase/firestore';
-  import {getStorage, ref, uploadBytes, getDownloadURL} from 'firebase/storage';
+  import {getStorage, ref, uploadBytes, deleteObject, getDownloadURL} from 'firebase/storage';
   import { app } from './firebase';
   
   const db = getFirestore(app);
@@ -88,6 +88,10 @@ export async function getSurveys(userId) {
       const surveyRef = doc(db, 'users', userId, 'surveys', surveyId);
   
       const surveyDoc = await getDoc(surveyRef);
+      const openFile = await fetch(newImage.uri);
+      
+      const blob = await openFile.blob();
+      console.log(openFile)
       const currentData = surveyDoc.data();
       let imageUrl = currentData.imageUrl;
   
@@ -96,7 +100,7 @@ export async function getSurveys(userId) {
       if (newImage) {
         // Excluindo a imagem antiga, se existir
         if (imageUrl) {
-          const oldImageRef = ref(storage, imageUrl.split('/').pop());
+          const oldImageRef = ref(storage, imageUrl);
           await deleteObject(oldImageRef);
         }
   
@@ -105,7 +109,7 @@ export async function getSurveys(userId) {
           storage,
           `surveys/${userId}/${name}/${newImage.name}`,
         );
-        await uploadBytes(newImageRef, newImage);
+        await uploadBytes(newImageRef, blob);
         imageUrl = await getDownloadURL(newImageRef);
       }
   

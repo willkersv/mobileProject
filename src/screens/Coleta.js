@@ -6,7 +6,7 @@ import {
 } from "react-native";
 import {useState, useEffect} from 'react';
 import { useFonts } from "expo-font";
-import Icon from "react-native-vector-icons/MaterialIcons";
+import Icon from 'react-native-vector-icons/FontAwesome6';
 import Agradecimentos from "./Agradecimentos";
 
 import {addRating} from '../config/functionPesquisa';
@@ -24,17 +24,8 @@ const AvaliacaoButton = props => {
 
 const Coleta = (props) => {
 
-  const [fontsLoaded] = useFonts({
-    AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
-  });
-
-  if (!fontsLoaded) {
-    return null;
-  }
-
   const [feedbackLevel, setFeedbackLevel] = useState(0);
   const {selectedSurvey} = useSurvey();
-
   const [userId, setUserId] = useState(null);
 
   useEffect(() => {
@@ -77,6 +68,15 @@ const Coleta = (props) => {
     // Navega para a tela de configuração da pesquisa
     props.navigation.pop(1);
   };
+
+  const [fontsLoaded] = useFonts({
+    AveriaLibre: require("../../assets/fonts/AveriaLibre-Regular.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
 
 
   return (
