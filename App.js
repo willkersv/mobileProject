@@ -15,6 +15,9 @@ import ModificarPesquisa from './src/screens/ModificarPesquisa';
 import Relatorio from './src/screens/Relatorio';
 import RecuperarSenha from './src/screens/RecuperarSenha';
 
+import { AuthProvider } from "./src/contexts/AuthContext.js";
+import {SurveyProvider} from './src/contexts/SurveyContext';
+
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -22,25 +25,29 @@ const App = () => {
   ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login" 
-      screenOptions={{ headerStyle: {backgroundColor: '#2B1D62', height: 80}, 
-      headerTintColor: '#573fba', 
-      headerTitleStyle: {color: '#FFFFFF', fontSize: 30, fontFamily: 'AveriaLibre'} }}>
+    <AuthProvider>
+      <SurveyProvider>
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Login" 
+          screenOptions={{ headerStyle: {backgroundColor: '#2B1D62', height: 80}, 
+          headerTintColor: '#573fba', 
+          headerTitleStyle: {color: '#FFFFFF', fontSize: 30, fontFamily: 'AveriaLibre'} }}>
 
-        <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
-        <Stack.Screen name="Drawer" component={Drawer} options={{ headerShown: false }} />
-        <Stack.Screen name="Carnaval" component={AcoesPesquisas} options={{ headerShown: true }} />
-        <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
-        <Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false }} />
-        <Stack.Screen name="Agradecimentos" component={Agradecimentos} options={{ headerShown: false }} />
-        <Stack.Screen name="NovaConta" component={NovaConta} options={{ headerShown: true }} />
-        <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
-        <Stack.Screen name="Relatório" component={Relatorio} options={{ headerShown: true }}/>
-        <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ headerShown: true }}/>
-        <Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
+            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name="Drawer" component={Drawer} options={{ headerShown: false }} />
+            <Stack.Screen name="Carnaval" component={AcoesPesquisas} options={{ headerShown: true }} />
+            <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} />
+            <Stack.Screen name="Coleta" component={Coleta} options={{ headerShown: false }} />
+            <Stack.Screen name="Agradecimentos" component={Agradecimentos} options={{ headerShown: false }} />
+            <Stack.Screen name="NovaConta" component={NovaConta} options={{ headerShown: true }} />
+            <Stack.Screen name="ModificarPesquisa" component={ModificarPesquisa} options={{ headerShown: true }}/>
+            <Stack.Screen name="Relatório" component={Relatorio} options={{ headerShown: true }}/>
+            <Stack.Screen name="RecuperarSenha" component={RecuperarSenha} options={{ headerShown: true }}/>
+            <Stack.Screen name="NovaPesquisa" component={NovaPesquisa} options={{ headerShown: true }}/>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SurveyProvider>
+    </AuthProvider>
   );
 };
 

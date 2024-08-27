@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { View,StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import { useFonts } from 'expo-font';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -9,10 +9,21 @@ import Button from '../components/Button.js';
 import ImageInput from '../components/ImageInput.js';
 import PopUp from '../components/PopUp.js';
 
-const ModificarPesquisa = () => {
+import {useSurvey} from '../contexts/SurveyContext.js';
+import {useAuth} from '../contexts/AuthContext.js';
+import {deleteSurvey, updateSurvey} from '../config/functionPesquisa.js';
+
+
+const ModificarPesquisa = (props) => {
     
   //referente ao modal de exclusao=================
     const [modalVisible, setModalVisible] = useState(false);
+    const [txtNomePesquisa, setTxtNomePesquisa] = useState('');
+    const [txtDataPesquisa, setTxtDataPesquisa] = useState('');
+    const [image, setImage] = useState(null);
+
+    const user = useAuth().user
+    const {selectedSurvey} = useSurvey();
 
     const openModal = () => {
       setModalVisible(true);
@@ -21,6 +32,41 @@ const ModificarPesquisa = () => {
     const closeModal = () => {
       setModalVisible(false);
     };
+
+
+    useEffect(() => {
+      // Carrega dados iniciais
+      if (selectedSurvey) {
+        setTxtNomePesquisa(selectedSurvey.name || '');
+        setTxtDataPesquisa(selectedSurvey.date || '');
+        setImage(selectedSurvey.imageUrl || null);
+      }
+    }, [selectedSurvey]);
+  
+    
+    const deletarPesquisa = async () => {
+      await deleteSurvey(user.uid, selectedSurvey.id);
+      props.navigation.pop(2);
+    };
+  
+    //=============================================
+  
+    const SalvarModificacao = async () => {
+      try {
+        // Se uma nova imagem foi selecionada
+        if (image instanceof Object) {
+          await updateSurvey(user.uid, selectedSurvey.id, txtNomePesquisa, txtDataPesquisa, image);
+        } else {
+          // Se nenhuma nova imagem foi selecionada, apenas atualize os dados
+          await updateSurvey(user.uid, selectedSurvey.id, txtNomePesquisa, txtDataPesquisa, null);
+        }
+        // Navegar de volta após a atualização
+        props.navigation.pop(2);
+      } catch (error) {
+        console.error('Erro ao salvar modificações:', error);
+      }
+    };
+  
     //=============================================
   
     //Fonte
@@ -31,18 +77,17 @@ const ModificarPesquisa = () => {
         return null
     }
 
-
-    const SalvarModificacao = () => {
-        console.log("BOTAO SALVAR MODIFICACAO")
-    }
-
     return (
         <View style={styles.container}>
             <View style = {styles.cInput}>
-                <LabelTextInput style={styles.label} label="Nome" placeHolder="Carnaval 2024"/>
-                <LabelTextInput_Icon style={styles.label} label="Data" placeHolder="16/02/2024" inputType="DATA"/>
+                <LabelTextInput style={styles.label} label="Nome" placeHolder={txtNomePesquisa} inputValue={txtNomePesquisa} onChangeText={setTxtNomePesquisa}/>
+                <LabelTextInput_Icon style={styles.label} label="Data" placeHolder={txtDataPesquisa} inputType="DATA" inputValue={txtDataPesquisa} onChangeText={setTxtDataPesquisa}/>
 
-                <ImageInput/>
+                {image ? (
+                  <ImageInput setImageCallback={setImage} initialValue={image} />
+                ) : (
+                  <Text style={styles.label}>Nenhuma imagem disponível</Text>
+                )}
                 
                 <Button txtButton="Salvar" buttonColor="#37BD6D" txtColor="#FFFFFF" functionButton={SalvarModificacao}/>
             </View>
@@ -52,7 +97,7 @@ const ModificarPesquisa = () => {
               <Icon name='delete' size={35}  color="#FFFFFF"/>
               <Text style={styles.botao}>Apagar</Text>
             </TouchableOpacity>
-            <PopUp modalVisible={modalVisible} closeModal={closeModal}/>
+            <PopUp modalVisible={modalVisible} closeModal={closeModal} modalAction={deletarPesquisa}/>
     </View>
 
     )
